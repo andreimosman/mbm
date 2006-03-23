@@ -1,5 +1,5 @@
 #
-#	$Id: dictionary,v 1.1 2006/03/23 11:45:06 hugo Exp $
+#	$Id: dictionary,v 1.1.1.1 2006/03/23 11:45:06 hugo Exp $
 #
 #	This file contains dictionary translations for parsing
 #	requests and generating responses.  All transactions are

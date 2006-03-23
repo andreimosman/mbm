@@ -6,7 +6,7 @@
 #	Modified for libradius by Alan DeKok <aland@ox.org>
 #	Modified for Cistron 1.6.X by Emanuel M. Santos <ems@unforgettable.com>
 #
-#	$Id: dictionary.bay,v 1.1 2006/03/23 11:45:07 hugo Exp $
+#	$Id: dictionary.bay,v 1.1.1.1 2006/03/23 11:45:07 hugo Exp $
 #
 
 VENDOR		Bay-Networks	1584		# now Nortel

@@ -4,7 +4,7 @@
 #		between Cistron Radius servers (eg radrelay) or
 #		for Cistron IP internal projects.
 #
-# Version:	$Id: dictionary.cistron,v 1.1 2006/03/23 11:45:09 hugo Exp $
+# Version:	$Id: dictionary.cistron,v 1.1.1.1 2006/03/23 11:45:09 hugo Exp $
 #
 
 VENDOR		Cistron		8246

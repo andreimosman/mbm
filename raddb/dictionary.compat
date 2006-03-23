@@ -3,7 +3,7 @@
 #	Move the $INCLUDE in the main dictionary file to the end if you want
 #	these names to be used in the "details" logfile.
 #
-#	$Id: dictionary.compat,v 1.1 2006/03/23 11:45:09 hugo Exp $
+#	$Id: dictionary.compat,v 1.1.1.1 2006/03/23 11:45:09 hugo Exp $
 #
 ATTRIBUTE	Password		2	string
 ATTRIBUTE	Client-Id		4	ipaddr
