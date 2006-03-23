@@ -1,7 +1,7 @@
 <?php
- if ( ! defined ( _TEMPLATE_INC ) )
+ if ( ! defined ( '_TEMPLATE_INC' ) )
  {
- 	define ( _TEMPLATE_INC, "TRUE" );
+ 	define ( '_TEMPLATE_INC', "TRUE" );
 
  /***************************************
  ** Title........: Template class

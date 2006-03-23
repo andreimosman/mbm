@@ -28,6 +28,12 @@
 	/* Procedimento iniciais utilizados */
 	require_once( $PATHS["procedures"] . "/conecta_bd.inc" );
 	
+
+	// Definicoes basicas	
+	$sessao = @$_GET['sessao'];
+	$asParseLoop = array();
+	
+	
 	
 	
 	$pgTPL = new template;

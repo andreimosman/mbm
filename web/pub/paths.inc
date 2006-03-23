@@ -1,5 +1,6 @@
 <?
-   $PREFIX="/usr/local/mbm";
+   //$PREFIX="/usr/local/mbm";
+   $PREFIX="../../";
 
    $PATHS["bin"]=$PREFIX."/bin";
    $PATHS["etc"]=$PREFIX."/etc";

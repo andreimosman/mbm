@@ -13,7 +13,7 @@
   <td width="100%">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td background="imagens/fundo_top.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <td colspan="2" background="imagens/fundo_top.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td width="209"><img src="imagens/logo.gif" width="209" height="45"></td>
               <td align="center" valign="bottom"><img src="imagens/titulo.gif" width="214" height="26"></td>
@@ -21,7 +21,7 @@
           </table></td>
       </tr>
       <tr>
-        <td><table width="550" border="0" cellpadding="0" cellspacing="0" background="imagens/fundo_barra.gif">
+        <td width="44%"><table width="550" border="0" cellpadding="0" cellspacing="0" background="imagens/fundo_barra.gif">
             <tr> 
              <td align="center" width="10">&nbsp;</td>
 	      <td align="center" width="50"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="{SELF}?sessao=home">Home</a></font></td>
@@ -44,5 +44,6 @@
               <td align="right" width=1><img src="imagens/barra_lado.gif" width="5" height="20"></td>
             </tr>
           </table></td>
+        <td width="56%" align="right"><font face="arial" size="2">admin: <b>{$sessLogin}</b> </font></td>
       </tr>
     </table> 

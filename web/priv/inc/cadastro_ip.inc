@@ -398,113 +398,257 @@
 
          if( $bExibirListagem ) {
          	$oper = @$_REQUEST["oper"];
-         	if (!$oper){
-            $tplVars = $oldTplVars;
-         
-            // Compatibilitade com o Lynx
-            $lynx_hr = strstr($HTTP_USER_AGENT,"Lynx") ? '<tr height="1"><td colspan="8" height="1"><hr size=1></td></tr>': '';
-         
-            // Improvements: OUTERJOIN :)) Agora usando postgres é possível
-            $sSQL = "SELECT ".
-                    "   i.ipaddr,i.interface_externa,i.interface_interna, i.banda_up,i.tipo_banda_up,i.banda_down,i.tipo_banda_down, ".
-                    "   c.username as cliente, c.mac, c.status, ia.banda_up as banda_up_alt, ia.tipo_banda_up as tipo_banda_up_alt,  ".
-                    "   ia.banda_down as banda_down_alt, ia.tipo_banda_down as tipo_banda_down_alt ".
-                    "FROM ".
-                    "   ( bmtb_ip as i LEFT OUTER JOIN bmtb_cliente as c USING( ipaddr ) ) LEFT OUTER JOIN bmtb_ip_alternativo ia ON( i.ipaddr = ia.ipaddr) ";
-                    " ORDER BY ".
-                    "   i.ipaddr ";
+         	if ($oper == "tudo"){
+				$tplVars = $oldTplVars;
 
-            $lista_ips = $bd->obtemRegistros( $sSQL );
-            
-            if(!count($lista_ips)) {
-               if( !$nenhum ) {
-                  $nenhum = "Nenhum IP cadastrado no sistema.";
-               }
-            }
-            
-            $bgcolorI1 = "#FFFFFF";
-            $bgcolorI2 = "#CCCCCC";
-            $bgcolorI = $bgcolorI2;
+				// Compatibilitade com o Lynx
+				$lynx_hr = strstr($HTTP_USER_AGENT,"Lynx") ? '<tr height="1"><td colspan="8" height="1"><hr size=1></td></tr>': '';
 
-            $bgcolorC1 = "#F0F0F0";
-            $bgcolorC2 = "#DADADA";
-            $bgcolorC = $bgcolorC2;
-            
-            $cor_ativo = "#008000";
-            $cor_naoinstalado = "#FF9933";
-            $cor_bloqueado = "#FF0000";
-            
-	    $clientes_ativos = 0;
-	    $clientes_bloqueados = 0;
-	    $ips_disponiveis = 0;
-	    $ips_cadastrados = count($lista_ips);
-	    
-            for($x=0;$x<count($lista_ips);$x++) {
-               $lista_ips[$x]["banda_alt_up"] = "";
-               if( $lista_ips[$x]["banda_up_alt"] > 0 ) {
-                  $lista_ips[$x]["banda_alt_up"] = "/" . $lista_ips[$x]["banda_up_alt"] . $lista_ips[$x]["tipo_banda_up_alt"];
-               }
-               $lista_ips[$x]["banda_alt_down"] = "";
-               if( $lista_ips[$x]["banda_down_alt"] > 0 ) {
-                  $lista_ips[$x]["banda_alt_down"] = "/" . $lista_ips[$x]["banda_down_alt"] . $lista_ips[$x]["tipo_banda_down_alt"];
-               }
+				// Improvements: OUTERJOIN :)) Agora usando postgres é possível
+				$sSQL = "SELECT ".
+						"   i.ipaddr,i.interface_externa,i.interface_interna, i.banda_up,i.tipo_banda_up,i.banda_down,i.tipo_banda_down, ".
+						"   c.username as cliente, c.mac, c.status, ia.banda_up as banda_up_alt, ia.tipo_banda_up as tipo_banda_up_alt,  ".
+						"   ia.banda_down as banda_down_alt, ia.tipo_banda_down as tipo_banda_down_alt ".
+						"FROM ".
+						"   ( bmtb_ip as i LEFT OUTER JOIN bmtb_cliente as c USING( ipaddr ) ) LEFT OUTER JOIN bmtb_ip_alternativo ia ON( i.ipaddr = ia.ipaddr) ";
+						" ORDER BY ".
+						"   i.ipaddr ";
 
-               $lista_ips[$x]["bgcolorI"] = $bgcolorI;
-               $lista_ips[$x]["bgcolorC"] = $bgcolorC;
-               //$lista_ips[$x]["tp_up"] = $lista_ips[$x]["tipo_banda_up"] == "P" ? "%" : $lista_ips[$x]["tipo_banda_up"] . "bps";
-               //$lista_ips[$x]["tp_down"] = $lista_ips[$x]["tipo_banda_down"] == "P" ? "%" : $lista_ips[$x]["tipo_banda_down"] . "bps";
-               $lista_ips[$x]["tp_up"] = $lista_ips[$x]["tipo_banda_up"];
-               $lista_ips[$x]["tp_down"] = $lista_ips[$x]["tipo_banda_down"];
-               
-               $lista_ips[$x]["operI"] = "";
-               $lista_ips[$x]["operC"] = "";
-               
-               $excluirIP = '<a href="'.$SELF.'?sessao=excluirIP&ip='.$lista_ips[$x]["ipaddr"].'"><img border="0" src="imagens/lixeira.gif" width="16" height="16" alt="[Excluir IP]"></a>';
-               $habilitarIP = '<a href="'.$SELF.'?sessao=cadastroCliente&ipaddr='.$lista_ips[$x]["ipaddr"].'"><img border="0" src="imagens/habilitar.gif" width="16" height="16" alt="[Habilitar IP]"></a>';
-               $iconeVazio = '<img border="0" src="imagens/pixel.gif" width="16" height="16" alt="">';
-               if( $lista_ips[$x]["cliente"] ) {
-                  $excluirCliente = '<a href="'.$SELF.'?sessao=excluirCliente&username='.$lista_ips[$x]["cliente"].'"><img border="0" src="imagens/lixeira.gif" width="16" height="16" alt="[Excluir Cliente]"></a>';
-                  $lista_ips[$x]["operC"] .= $excluirCliente;
-                  $lista_ips[$x]["st_nao_ativado"] = "";
+				$lista_ips = $bd->obtemRegistros( $sSQL );
 
-                  // Cliente Ativo
-                  if( $lista_ips[$x]["status"] == "A" ) {
-                     $lista_ips[$x]["strstatus"] = "Ativo";
-                     $clientes_ativos++;
-                     $lista_ips[$x]["cor_status"] = $cor_ativo;
-                     
-                  } else {
-                     $lista_ips[$x]["strstatus"] = "Bloqueado";
-                     $clientes_bloqueados++;
-                     $lista_ips[$x]["cor_status"] = $cor_bloqueado;
-                  }
-                  $lista_ips[$x]["operI"] .= $iconeVazio;
-               } else {
-	          $ips_disponiveis++;
-                  $lista_ips[$x]["strstatus"] = "";
-                  $lista_ips[$x]["cor_status"] = $cor_naoinstalado;
-                  //$lista_ips[$x]["st_nao_ativado"] = "Não habilitado";
-                  $lista_ips[$x]["st_nao_ativado"] = "Ñ Hab.";
-                  $lista_ips[$x]["operI"] .= $habilitarIP;
-               }
-               
-               $bgcolorI = $bgcolorI == $bgcolorI1 ? $bgcolorI2 : $bgcolorI1;
-               $bgcolorC = $bgcolorC == $bgcolorC1 ? $bgcolorC2 : $bgcolorC1;
-               
-               $lista_ips[$x]["operI"] .= $excluirIP;
-               
-               $lista_ips[$x]["dir"] = str_replace("/", "-", $lista_ips[$x]["ipaddr"]);
+				if(!count($lista_ips)) {
+				   if( !$nenhum ) {
+					  $nenhum = "Nenhum IP cadastrado no sistema.";
+				   }
+				}
 
-            }
+				$bgcolorI1 = "#FFFFFF";
+				$bgcolorI2 = "#CCCCCC";
+				$bgcolorI = $bgcolorI2;
+
+				$bgcolorC1 = "#F0F0F0";
+				$bgcolorC2 = "#DADADA";
+				$bgcolorC = $bgcolorC2;
+
+				$cor_ativo = "#008000";
+				$cor_naoinstalado = "#FF9933";
+				$cor_bloqueado = "#FF0000";
+
+			$clientes_ativos = 0;
+			$clientes_bloqueados = 0;
+			$ips_disponiveis = 0;
+			$ips_cadastrados = count($lista_ips);
+
+				for($x=0;$x<count($lista_ips);$x++) {
+				   $lista_ips[$x]["banda_alt_up"] = "";
+				   if( $lista_ips[$x]["banda_up_alt"] > 0 ) {
+					  $lista_ips[$x]["banda_alt_up"] = "/" . $lista_ips[$x]["banda_up_alt"] . $lista_ips[$x]["tipo_banda_up_alt"];
+				   }
+				   $lista_ips[$x]["banda_alt_down"] = "";
+				   if( $lista_ips[$x]["banda_down_alt"] > 0 ) {
+					  $lista_ips[$x]["banda_alt_down"] = "/" . $lista_ips[$x]["banda_down_alt"] . $lista_ips[$x]["tipo_banda_down_alt"];
+				   }
+
+				   $lista_ips[$x]["bgcolorI"] = $bgcolorI;
+				   $lista_ips[$x]["bgcolorC"] = $bgcolorC;
+				   //$lista_ips[$x]["tp_up"] = $lista_ips[$x]["tipo_banda_up"] == "P" ? "%" : $lista_ips[$x]["tipo_banda_up"] . "bps";
+				   //$lista_ips[$x]["tp_down"] = $lista_ips[$x]["tipo_banda_down"] == "P" ? "%" : $lista_ips[$x]["tipo_banda_down"] . "bps";
+				   $lista_ips[$x]["tp_up"] = $lista_ips[$x]["tipo_banda_up"];
+				   $lista_ips[$x]["tp_down"] = $lista_ips[$x]["tipo_banda_down"];
+
+				   $lista_ips[$x]["operI"] = "";
+				   $lista_ips[$x]["operC"] = "";
+
+				   $excluirIP = '<a href="'.$SELF.'?sessao=excluirIP&ip='.$lista_ips[$x]["ipaddr"].'"><img border="0" src="imagens/lixeira.gif" width="16" height="16" alt="[Excluir IP]"></a>';
+				   $habilitarIP = '<a href="'.$SELF.'?sessao=cadastroCliente&ipaddr='.$lista_ips[$x]["ipaddr"].'"><img border="0" src="imagens/habilitar.gif" width="16" height="16" alt="[Habilitar IP]"></a>';
+				   $iconeVazio = '<img border="0" src="imagens/pixel.gif" width="16" height="16" alt="">';
+				   if( $lista_ips[$x]["cliente"] ) {
+					  $excluirCliente = '<a href="'.$SELF.'?sessao=excluirCliente&username='.$lista_ips[$x]["cliente"].'"><img border="0" src="imagens/lixeira.gif" width="16" height="16" alt="[Excluir Cliente]"></a>';
+					  $lista_ips[$x]["operC"] .= $excluirCliente;
+					  $lista_ips[$x]["st_nao_ativado"] = "";
+
+					  // Cliente Ativo
+					  if( $lista_ips[$x]["status"] == "A" ) {
+						 $lista_ips[$x]["strstatus"] = "Ativo";
+						 $clientes_ativos++;
+						 $lista_ips[$x]["cor_status"] = $cor_ativo;
+
+					  } else {
+						 $lista_ips[$x]["strstatus"] = "Bloqueado";
+						 $clientes_bloqueados++;
+						 $lista_ips[$x]["cor_status"] = $cor_bloqueado;
+					  }
+					  $lista_ips[$x]["operI"] .= $iconeVazio;
+				   } else {
+				  $ips_disponiveis++;
+					  $lista_ips[$x]["strstatus"] = "";
+					  $lista_ips[$x]["cor_status"] = $cor_naoinstalado;
+					  //$lista_ips[$x]["st_nao_ativado"] = "Não habilitado";
+					  $lista_ips[$x]["st_nao_ativado"] = "Ñ Hab.";
+					  $lista_ips[$x]["operI"] .= $habilitarIP;
+				   }
+
+				   $bgcolorI = $bgcolorI == $bgcolorI1 ? $bgcolorI2 : $bgcolorI1;
+				   $bgcolorC = $bgcolorC == $bgcolorC1 ? $bgcolorC2 : $bgcolorC1;
+
+				   $lista_ips[$x]["operI"] .= $excluirIP;
+
+				   $lista_ips[$x]["dir"] = str_replace("/", "-", $lista_ips[$x]["ipaddr"]);
+
+				}
+
+				$mensagem = "<font face=arial size=2 color=black>Lista Completa de IPS</font>";
+				$mrtgweb = $mrtgCONF["webbase"];
+				$tplVars .= ($tplVars ? ",":"") . "mensagem,nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
+
+				$tplLoops[] = "lista_ips";
+
+				$sArqTemplate = $sDirTemplate."/lista_ips.tpl";
+
             
             
-            $mrtgweb = $mrtgCONF["webbase"];
-            $tplVars .= ($tplVars ? ",":"") . "nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
+         	}  else if ($oper == "pesquisa"){
             
-            $tplLoops[] = "lista_ips";
             
-            $sArqTemplate = $sDirTemplate."/lista_ips.tpl";
-         	}   
+            
+				$cond = @$_REQUEST["cond"];
+				$chave = @$_REQUEST["chave"];
+				$tplVars = $oldTplVars;
+
+				// Compatibilitade com o Lynx
+				$lynx_hr = strstr($HTTP_USER_AGENT,"Lynx") ? '<tr height="1"><td colspan="8" height="1"><hr size=1></td></tr>': '';
+
+				// Improvements: OUTERJOIN :)) Agora usando postgres é possível
+				$sSQL  = "SELECT ";
+				$sSQL .= "  i.ipaddr, i.interface_externa, i.interface_interna, i.banda_up, i.tipo_banda_up, i.banda_down, i.tipo_banda_down, ";
+				$sSQL .= "  c.username as cliente, c.mac, c.status, ia.banda_up as banda_up_alt, ia.tipo_banda_up as tipo_banda_up_alt,  ";
+				$sSQL .= "  ia.banda_down as banda_down_alt, ia.tipo_banda_down as tipo_banda_down_alt ";
+				$sSQL .= "FROM ";
+				$sSQL .= "  ( bmtb_ip as i LEFT OUTER JOIN bmtb_cliente as c USING( ipaddr ) ) LEFT OUTER JOIN bmtb_ip_alternativo ia ON( i.ipaddr = ia.ipaddr) ";
+				$sSQL .= " WHERE ";
+
+				switch ($cond){
+					
+					case 'username':
+						$sSQL .=" c.username = '".$chave."' ";
+					break;
+					
+					case 'ip':
+						$sSQL .=" i.ipaddr = '".$chave."' ";
+					break;
+				}
+
+				//$sSQL .=" ORDER BY ".
+				//$sSQL .="   i.ipaddr ";
+
+				//echo "SQL PESQUISA: $sSQL <br>\n";
+
+
+				$lista_ips = $bd->obtemRegistros( $sSQL );
+
+				if(!count($lista_ips)) {
+				   if( !$nenhum ) {
+					  $nenhum = "Nenhum Registro Encontrado.";
+				   }
+				}
+
+				$bgcolorI1 = "#FFFFFF";
+				$bgcolorI2 = "#CCCCCC";
+				$bgcolorI = $bgcolorI2;
+
+				$bgcolorC1 = "#F0F0F0";
+				$bgcolorC2 = "#DADADA";
+				$bgcolorC = $bgcolorC2;
+
+				$cor_ativo = "#008000";
+				$cor_naoinstalado = "#FF9933";
+				$cor_bloqueado = "#FF0000";
+
+			$clientes_ativos = 0;
+			$clientes_bloqueados = 0;
+			$ips_disponiveis = 0;
+			$ips_cadastrados = count($lista_ips);
+
+				for($x=0;$x<count($lista_ips);$x++) {
+				   $lista_ips[$x]["banda_alt_up"] = "";
+				   if( $lista_ips[$x]["banda_up_alt"] > 0 ) {
+					  $lista_ips[$x]["banda_alt_up"] = "/" . $lista_ips[$x]["banda_up_alt"] . $lista_ips[$x]["tipo_banda_up_alt"];
+				   }
+				   $lista_ips[$x]["banda_alt_down"] = "";
+				   if( $lista_ips[$x]["banda_down_alt"] > 0 ) {
+					  $lista_ips[$x]["banda_alt_down"] = "/" . $lista_ips[$x]["banda_down_alt"] . $lista_ips[$x]["tipo_banda_down_alt"];
+				   }
+
+				   $lista_ips[$x]["bgcolorI"] = $bgcolorI;
+				   $lista_ips[$x]["bgcolorC"] = $bgcolorC;
+				   //$lista_ips[$x]["tp_up"] = $lista_ips[$x]["tipo_banda_up"] == "P" ? "%" : $lista_ips[$x]["tipo_banda_up"] . "bps";
+				   //$lista_ips[$x]["tp_down"] = $lista_ips[$x]["tipo_banda_down"] == "P" ? "%" : $lista_ips[$x]["tipo_banda_down"] . "bps";
+				   $lista_ips[$x]["tp_up"] = $lista_ips[$x]["tipo_banda_up"];
+				   $lista_ips[$x]["tp_down"] = $lista_ips[$x]["tipo_banda_down"];
+
+				   $lista_ips[$x]["operI"] = "";
+				   $lista_ips[$x]["operC"] = "";
+
+				   $excluirIP = '<a href="'.$SELF.'?sessao=excluirIP&ip='.$lista_ips[$x]["ipaddr"].'"><img border="0" src="imagens/lixeira.gif" width="16" height="16" alt="[Excluir IP]"></a>';
+				   $habilitarIP = '<a href="'.$SELF.'?sessao=cadastroCliente&ipaddr='.$lista_ips[$x]["ipaddr"].'"><img border="0" src="imagens/habilitar.gif" width="16" height="16" alt="[Habilitar IP]"></a>';
+				   $iconeVazio = '<img border="0" src="imagens/pixel.gif" width="16" height="16" alt="">';
+				   if( $lista_ips[$x]["cliente"] ) {
+					  $excluirCliente = '<a href="'.$SELF.'?sessao=excluirCliente&username='.$lista_ips[$x]["cliente"].'"><img border="0" src="imagens/lixeira.gif" width="16" height="16" alt="[Excluir Cliente]"></a>';
+					  $lista_ips[$x]["operC"] .= $excluirCliente;
+					  $lista_ips[$x]["st_nao_ativado"] = "";
+
+					  // Cliente Ativo
+					  if( $lista_ips[$x]["status"] == "A" ) {
+						 $lista_ips[$x]["strstatus"] = "Ativo";
+						 $clientes_ativos++;
+						 $lista_ips[$x]["cor_status"] = $cor_ativo;
+
+					  } else {
+						 $lista_ips[$x]["strstatus"] = "Bloqueado";
+						 $clientes_bloqueados++;
+						 $lista_ips[$x]["cor_status"] = $cor_bloqueado;
+					  }
+					  $lista_ips[$x]["operI"] .= $iconeVazio;
+				   } else {
+				  $ips_disponiveis++;
+					  $lista_ips[$x]["strstatus"] = "";
+					  $lista_ips[$x]["cor_status"] = $cor_naoinstalado;
+					  //$lista_ips[$x]["st_nao_ativado"] = "Não habilitado";
+					  $lista_ips[$x]["st_nao_ativado"] = "Ñ Hab.";
+					  $lista_ips[$x]["operI"] .= $habilitarIP;
+				   }
+
+				   $bgcolorI = $bgcolorI == $bgcolorI1 ? $bgcolorI2 : $bgcolorI1;
+				   $bgcolorC = $bgcolorC == $bgcolorC1 ? $bgcolorC2 : $bgcolorC1;
+
+				   $lista_ips[$x]["operI"] .= $excluirIP;
+
+				   $lista_ips[$x]["dir"] = str_replace("/", "-", $lista_ips[$x]["ipaddr"]);
+
+				}
+
+				$mensagem = "<font face=arial size=2 color=black>Lista de Ips contendo <b>$chave</b> no campo <b>$cond</b></font>";
+				$mrtgweb = $mrtgCONF["webbase"];
+				$tplVars .= ($tplVars ? ",":"") . "mensagem,nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
+
+				$tplLoops[] = "lista_ips";
+
+				$sArqTemplate = $sDirTemplate."/lista_ips.tpl";         	
+
+         	
+         	
+         	
+         	
+         	}else{
+         	    //$mensagem = "Lista de Ips contendo o $chave no campo $cond";
+			    $mrtgweb = $mrtgCONF["webbase"];
+			    $tplVars .= ($tplVars ? ",":"") . "nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
+			            
+			    			            
+			    $sArqTemplate = $sDirTemplate."/lista_ips.tpl";         	
+
+         	}
+         	
          } else {
             $oper = "efetuaAlteracao";
             $submit = "Alterar Dados";
