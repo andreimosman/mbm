@@ -1,0 +1,17 @@
+#!/bin/sh
+# Inverte o PF em uso.
+################################
+PREFIX='/usr/local/mbm/etc'
+
+atual=`cat $PREFIX/pfatual`
+
+if [ "$atual" = "ALTERNATIVO" ]; then
+   echo -n "COMERCIAL" > $PREFIX/pfatual
+   cp $PREFIX/pf.comercial.conf $PREFIX/pf.conf
+   cp $PREFIX/mrtg.comercial.conf $PREFIX/mrtg.conf
+else
+   echo -n "ALTERNATIVO" > $PREFIX/pfatual
+   cp $PREFIX/pf.alternativo.conf $PREFIX/pf.conf
+   cp $PREFIX/mrtg.alternativo.conf $PREFIX/mrtg.conf
+fi
+pfctl -f /etc/pf.conf 

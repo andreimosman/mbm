@@ -1,0 +1,27 @@
+#
+# clients	This file contains a list of clients which are allowed to
+#		make authentication requests and their encryption key.
+#
+#		Description of the fields:
+#
+#		* The first field is a valid hostname or IP address
+#		  for the client.
+#		* The second field (seperated by blanks or tabs) is the 
+#		  encryption key.
+
+# Client Name		Key
+#----------------	----------
+#portmaster1.isp.com	testing123
+#portmaster2.isp.com	testing123
+#proxyradius.isp2.com	TheirKey
+200.141.201.100		ninjamanco
+200.141.201.101		ninjamanco
+200.141.201.102         ninjamanco
+200.141.201.103         ninjamanco
+200.141.201.104         ninjamanco
+200.141.201.105         ninjamanco
+200.141.201.106         ninjamanco
+
+
+
+localhost		testing123

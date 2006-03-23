@@ -1,0 +1,28 @@
+############################################################################
+# Este arquivo é parte integrante do MBM (Mosman Bandwidth Manager)        #
+# CopyRight(c) mosman.com.br - Todos os direitos reservados                #
+# http://www.mosman.com.br/                                                #
+# mailto: mbm@mosman.com.br / mosman@mosman.com.br / suporte@mosman.com.br #
+############################################################################
+
+# Negando acesso para redes e hosts específicos
+#order allow,deny
+#deny from 123.45.6.7
+#deny from 012.34.5.
+#allow from all
+
+# Liberando acesso para hosts específicos
+#order allow,deny
+#deny from all
+#allow from 192.168.0.
+#allow from 127.0.0.1
+
+# Liberando acesso via senha
+AuthName "Mosman Bandwidth Manager"
+AuthType Basic
+require valid-user
+AuthUserFile /usr/local/mbm/web/pub/.htpasswd
+
+# SSI
+Options +Includes
+rogerio:2.WaLtKmp7TUc

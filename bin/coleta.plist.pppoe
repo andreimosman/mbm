@@ -1,0 +1,11 @@
+#!/bin/sh
+
+PPPOESERVER=$1
+PPPOESTPORT=$2
+PPPOESRVNAME=$3
+
+TMPARQ=/tmp/`date +"%Y%m%d%H%M%S"`
+ARQ=/usr/local/mbm/var/pppoe.pl.$PPPOESRVNAME
+/usr/bin/nc $PPPOESERVER $PPPOESTPORT > $TMPARQ
+cp $TMPARQ $ARQ
+rm $TMPARQ

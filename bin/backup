@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Rotina de backup do MBM
+# Por: Andrei de Oliveira Mosman
+# mosman@mosman.com.br / andreimosman@hotmail.com
+##################################################################
+
+# Variáveis
+
+BKPDIR=/usr/local/mbm/var/backup
+SUFIXO=`date "+%Y-%m-%d_%H-%M-%S"`
+SU=/usr/bin/su
+PGDUMP=/usr/local/bin/pg_dump
+PGUSER=postgres
+
+# Backup do banco de dados
+$SU -l $PGUSER -c "$PGDUMP -Z9 -aRd mbm" > $BKPDIR/bd-$SUFIXO.gz
+

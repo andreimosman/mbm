@@ -1,0 +1,85 @@
+######################################################################################
+# /etc/pf.conf                                                                       #
+# Arquivo gerado pelo MBM - Mosman Bandwidth Manager V {versao_mbm}                  #
+# Autor: Andrei de Oliveira Mosman - Todos os direitos reservados                    #
+# mosman@mosman.com.br / andreimosman@hotmail.com                                    #
+# Todos os direitos reservados                                                       #
+#                                                                                    #
+# See pf.conf(5) for syntax and examples                                             #
+######################################################################################
+
+#
+# Options
+#
+
+
+
+#
+# Normalizations
+#
+
+scrub in all
+
+###########################################################################
+# GERADO DINAMICAMENTE (VIA INTERFACE WEB/ATUALIZACAO DO SISTEMA (inicio) #
+###########################################################################
+
+pass in all
+pass out all
+
+
+#
+# Queue
+#
+
+
+
+
+########################
+# Início dos bloqueios #
+########################
+
+# Redes bloqueadas
+###################
+<loop name="redes_bloqueadas">
+# {username} ({str_status})
+block out from any to {alvo}
+block in from {alvo} to any
+</loop name="redes_bloqueadas">
+
+# IPs bloqueados
+###################
+<loop name="ips_bloqueados">
+# {username} ({str_status})
+block out quick from any to {alvo}
+block in quick from {alvo} to any
+</loop name="ips_bloqueados">
+
+# Serviços bloqueados
+###################
+<loop name="servicos_bloqueados">
+# {username} ({servico})
+block {tipo_bloqueio} quick proto tcp from {origem} to {destino}
+#block {tipo_bloqueio} quick proto udp from {origem} to {destino}
+</loop name="servicos_bloqueados">
+
+########################
+# Fianal dos bloqueios #
+########################
+
+
+
+# Rotulos (IPs disponiveis)
+##################
+
+<loop name="ips_disponiveis">
+# {username} ({str_status})
+pass out quick from any to {ipaddr} label out_{rotulo}
+pass in  quick from {ipaddr} to any label in_{rotulo}
+</loop name="ips_disponiveis">
+
+###########################################################################
+# GERADO DINAMICAMENTE (VIA INTERFACE WEB/ATUALIZACAO DO SISTEMA (fim)    #
+###########################################################################
+
+{PF_POS_CONF}

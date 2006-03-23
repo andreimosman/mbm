@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+# Arquivo para coletar as estatisticas do PF para o dado IP
+# CopyRight(C) Andrei de Oliveira Mosman
+# mosman@mosman.com.br / andreimosman@hotmail.com.br
+###########################################################
+
+# TODO: Escrever este codigo em C
+
+@partes = split(/\./, @ARGV[0]);
+
+#$sulfixo = @ARGV[0] eq 'link' ? @ARGV[0] : @partes[2]."_".@partes[3];
+$sulfixo = @ARGV[0];
+$sulfixo=~s/\./_/g;
+$sulfixo=~s/\//-/g;
+$sulfixo.="_";
+#$up_full = `pfctl -s lables|grep out_$sulfixo`;
+#$down_full = `pfctl -s lables|grep in_$sulfixo`;
+$up_full = `grep out_$sulfixo /usr/local/mbm/var/pfctl-sl`;
+$down_full = `grep in_$sulfixo /usr/local/mbm/var/pfctl-sl`;
+
+@partes = split(/ /,$down_full);
+@partes[3]=~s/\n//g;
+print int(@partes[3])."\n";
+@partes = split(/ /,$up_full);
+@partes[3]=~s/\n//g;
+print int(@partes[3])."\n";
+print "0\n0";

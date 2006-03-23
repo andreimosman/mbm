@@ -1,0 +1,81 @@
+#! /usr/bin/perl
+#
+$DBNAME = "mbm";
+$DBUSER = "mbm";
+#
+##########################
+
+$TIPO = $ARGV[0];
+$SESSION = $ARGV[1];
+$USER = $ARGV[2];
+$IP = $ARGV[3];
+$NAS = $ARGV[4];
+$FONE = $ARGV[5];
+$TOTAL = $ARGV[6];
+$START = "";
+$STOP = "";
+
+use DBI;
+use Time::gmtime;
+
+
+my ($stop_sec, $stop_min, $stop_hour, $stop_mday, $stop_mon, $stop_year, 
+	$stop_wday, $stop_yday, $stop_isdst) = localtime( time );
+my ($start_sec, $start_min, $start_hour, $start_mday, $start_mon, $start_year,
+	$start_wday, $start_yday, $start_isdst) = localtime( time - $SESSION_TIME);
+
+$dbh = DBI->connect("dbi:Pg:dbname=$DBNAME", "$DBUSER","", {
+                   PrintError => 0,RaiseError => 0,
+                   AutoCommit => 1
+             })
+	|| die "Can't connect to $DBNAME: $DBI::errstr";
+
+#$START = "$start_year-$start_mon-$start_mday $start_hour:$start_min:$start_sec";
+#$STOP = "$stop_year-$stop_mon-$stop_mday $stop_hour:$stop_min:$stop_sec";
+
+
+if( $TIPO eq "START" ) {
+   # INSERT
+   $sth = $dbh->prepare( q{
+		INSERT INTO 
+                   bmtb_log_acesso (
+                       session_id,username,login,logout,tempo,telefone,nas,ip
+                   ) VALUES (?, lower(?), now(), NULL, ?, ?, ?, ?) 
+         }) || die "Can't prepare statement: $DBI::errstr";
+
+   $rc = $sth->execute($SESSION, $USER, $TOTAL, $FONE, $NAS, $IP) 	|| die "Can't execute statement: $DBI::errstr";
+
+
+
+} 
+
+if( $TIPO eq "STOP" ) {
+   # UPDATE
+
+   print "TOTAL: $TOTAL \n";
+   
+   $sth = $dbh->prepare( q{
+		UPDATE 
+                   bmtb_log_acesso
+                SET
+                   logout = now(),
+                   tempo = ?
+                WHERE
+                   session_id = ?
+                   AND username = lower(?)
+
+         }) || die "Can't prepare statement: $DBI::errstr";
+
+
+     $rc = $sth->execute($TOTAL, $SESSION, $USER) 	||  die "Can't execute statement: $DBI::errstr";
+
+
+#    $rc = $sth->execute($TOTAL, $SESSION, $USER)	|| die "Can't execute statement: $DBI::errstr";
+
+
+
+
+}
+
+$rc  = $dbh->disconnect || warn $dbh->errstr;
+

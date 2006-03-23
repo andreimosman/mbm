@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+@ifconfig = split(/\n/,`ifconfig -a|grep flags|cut -d':' -f 1`);
+
+$num_ifaces = 0;
+
+foreach $iface (@ifconfig) {
+   if($iface!~/(tun|lo|pflog|pfsync|sl|ppp|tun|bridge|vlan|gre|gif|enc)[0-9]/){
+      print "IFACE: $iface \n";
+      @ifaces[$num_ifaces++]{"iface"}=$iface;
+
+   }
+}

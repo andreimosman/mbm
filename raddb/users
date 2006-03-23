@@ -1,0 +1,27 @@
+#DEFAULT	Service-Type = Framed-User
+#	Framed-IP-Address = 255.255.255.254,
+#	Framed-MTU = 576,
+#	Service-Type = Framed-User,
+#	Fall-Through = Yes
+#
+#DEFAULT	Framed-Protocol = PPP
+#	Framed-Protocol = PPP,
+#	Framed-Compression = Van-Jacobson-TCP-IP
+#
+#DEFAULT	Hint = "CSLIP"
+#	Framed-Protocol = SLIP,
+#	Framed-Compression = Van-Jacobson-TCP-IP
+#
+#DEFAULT	Hint = "SLIP"
+#	Framed-Protocol = SLIP
+
+DEFAULT Acct-Status-Type = "Start"
+        Exec-Program-Account  = "/usr/local/mbm/bin/mbm-radius-acct START %x %u %f %z %g"	
+
+DEFAULT Acct-Status-Type = "Stop"
+        Exec-Program-Account  = "/usr/local/mbm/bin/mbm-radius-acct STOP %x %u %f %z %g %e"
+
+DEFAULT Auth-Type = External
+        Exec-Program-Wait = "/usr/local/mbm/bin/mbm-radius-auth %u %w %g %z",
+        Fall-Through = Yes
+

@@ -1,0 +1,6 @@
+Templates utilizados para gerar os arquivos de configurações
+
+pf.tpl   --> $PREFIX/etc/pf.conf
+altq.tpl --> $PREFIX/etc/altq.conf
+macs.tpl --> $PREFIX/etc/macs.conf
+mrtg.tpl --> $PREFIX/etc/mrtg.conf

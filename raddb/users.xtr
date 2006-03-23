@@ -1,0 +1,16 @@
+# Xtradius 1.1
+# Sample users file
+#
+
+DEFAULT Acct-Status-Type = "Start"
+        Exec-Program-Account = "/etc/raddb/xtradius_test.pl %u %e %y %i %o %d %k",
+	Exec-Program-Nas = "/etc/raddb/xtradius_test.pl %n"
+
+DEFAULT Acct-Status-Type = "Stop"
+        Exec-Program-Account = "/etc/raddb/xtradius_test.pl %u %e %y %i %o %d %k",
+	Exec-Program-Nas = "/etc/raddb/xtradius_test.pl %n"
+
+DEFAULT	Auth-Type = External
+	Exec-Program-Wait = "/etc/raddb/xtradius_test.pl %u %w %y %g %h",
+	Fall-Through = Yes
+

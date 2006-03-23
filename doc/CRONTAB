@@ -1,0 +1,4 @@
+# Labels
+* * * * * /sbin/pfctl -s l > /usr/local/mbm/var/pfctl-sl
+# MRTG
+*/5 * * * * /usr/bin/nice -n 20 /usr/local/bin/mrtg /usr/local/mbm/etc/mrtg.conf

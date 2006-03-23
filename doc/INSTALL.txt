@@ -1,0 +1,82 @@
+GUIA DA INSTALACAO
+
+Por: Andrei de Oliveira Mosman
+mosman@mosman.com.br / andreimosman@hotmail.com
+
+1) Instale o OpenBSD com todos os pacotes da instalacao padrao exceto o pacote
+game31.tgz e faca as configuracoes iniciais (redes, rotas, etc)
+
+2) A instalacao padrao do OpenBSD 3.1 vem com um BUG de seguranca do OpenSSH
+que permite ao usuario malicioso conseguir root remoto na maquina, corrija 
+esta falha com a seguinte linha no /etc/ssh/sshd_config:
+
+     ChallengeResponseAuthentication no
+
+Salve as alteracoes e restarte o servico
+
+3) Utilizando-se do ports instale as dependencias do MBM nao encontradas
+na instalacao padrao do OpenBSD 3.1:
+
+/usr/ports/sysutils/skill
+/usr/ports/databases/posgresql
+/usr/ports/www/php4 (com suporte ao PostgreSQL)
+/usr/ports/net/ucd-snmp
+/usr/ports/net/mrtg
+
+4) Siga os procedimentos para instalacao do Postgres para colocar o servico na
+inicializacao. Contudo acrescente o "-i" dentro da opcao "-o" do pg_ctl. Essa
+opcao eh necessaria para que o PHP acesse o postgres (habilita as conexoes ao
+banco via TCP/IP). A partir do passo 6 sera necessario que o banco esteja 
+startado.
+
+5) Habilite o PHP de acordo com as instrucoes pos-instalacao.
+
+6) Descompacte o snapshot do MBM gerado pelo deployer no diretorio raiz sem se
+esquecer da opcao p (que descompacta usando informacoes de modos, UID e GID:
+
+#cd /
+#tar -xzpvf /path/to/mbm-123123123.tgz
+
+7) Edite o arquivo /var/www/conf/httpd.conf e:
+
+inclua a seguinte linha no final do arquivo:
+
+     include /usr/local/mbm/etc/httpd.mbm.conf
+
+altere o DocumentRoot para /usr/local/mbm/web/pub
+
+acrescente "index.php" no DocumentIndexes
+
+salve o arquivo e restarte o processo.
+
+8) Crie o usuario e o banco de dados:
+
+#su -l postgresql
+#createuser -A -d
+#createdb -U mbm mbm
+#psql -U mbm < /diretorio/do/script.sql
+#echo "ALTER USER mbm NOCREATEDB;" | psql
+#echo "ALTER USER mbm PASSWORD 'mbm1979' | psql
+
+9) Configure o SUDO:
+
+#visudo
+
+e acrescente a seguinte linha no final do arquivo:
+
+     www ALL = NOPASSWD: /bin/sh /usr/local/mbm/bin/atualiza.sh
+
+10) CRON
+
+#crontab -e
+
+Inclua as seguintes linhas:
+
+*/5 * * * * /usr/local/bin/mrtg /usr/local/mbm/etc/mrtg.conf
+0 5 * * * /usr/local/mbm/bin/backup
+
+11) Links
+
+/etc/pf.conf --> /usr/local/mbm/etc/pf.conf
+/etc/macs.conf --> /usr/local/mbm/etc/macs.conf
+/etc/altq.conf --> /usr/local/mbm/etc/altq.conf

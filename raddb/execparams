@@ -1,0 +1,27 @@
+# Xtradius - External configuration parameters config
+# In this file you can define the param char used to substitute attributes
+# before executing external scripts
+# NOTE:
+# - Dictionary Attributes are case-sensitive!
+# - %x is reserver for detail-log filename (Only in EXEC_PROGRAM_LOG)
+# - %k is reserved for Session-id (packet serial number assigned by the NAS)
+#   the %k is not the Acct-Session-Id
+#
+NAS-IP-Address	n
+Framed-MTU	t
+User-Name	u
+Password	w
+Callback-Number	c
+Framed-Protocol	a
+Acct-Session-Time	e
+Acct-Input-Octets	i
+Acct-Output-Octets	o
+NAS-Port-Type	y
+Acct-Status-Type	d
+Connect-Info	s
+Calling-Station-Id	g
+Called-Station-Id	h
+NAS-Port-Id	p
+NAS-Identifier	z
+Framed-IP-Address	f
+Acct-Session-Id	x

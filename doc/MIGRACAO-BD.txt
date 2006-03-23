@@ -1,0 +1,35 @@
+MIGRACAO DO BANCO DE DADOS PARA VERSOES DO MBM ANTERIORES A 1.4
+
+Por: Andrei de Oliveira Mosman
+mosman@mosman.com.br / andreimosman@hotmail.com
+
+Na versao 1.4 a estrutura do banco de dados mudou, deve-se levar em conta
+este documento antes de atualizar o sistema.
+
+Para migrar o banco de dados para o modelo novo deve-se efetuar os seguintes
+passos:
+
+1) Fazer o backup manual dos dados do sistema atual:
+su - postgresql -c "pg_dump -aRd mbm" > /mbm-dados.sql
+
+Verifique se o arquivo foi criado corretamente:
+
+cat /mbm-dados.sql
+
+2) Alterar o script gerado pelo backup:
+
+a. Exclua todas as linhas para desabilitar os triggers
+b. Substitua todas as ocorrencias de "'S'" por "'I'"
+
+3) Recriar o banco de dados utilizando o script de criacao. Certifique-se de
+que o script esteja rodando todos os "drop table", respeitando a ordem da
+integridade referencial. Nao faca modificacoes nos scripts, eles sao gerados
+pelo programa de modelagem de dados. Se as linhas de " drop table" nao
+estiverem no arquivo faca os "drop table" na mao.
+
+psql -U mbm < script-scriacao.sql
+
+4) Importar os dados
+
+psql -U mbm < /mbm-dados.sql
+

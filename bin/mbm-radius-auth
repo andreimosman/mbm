@@ -1,0 +1,164 @@
+#! /usr/bin/perl
+#
+$DBNAME = "mbm";
+$DBUSER = "mbm";
+#
+##########################
+my $GRANTACCESS = 0;
+my $DENYACCESS = -1;
+
+my $ret = $DENYACCESS;
+
+$REALMDEFAULT = "aeronet.com.br";
+
+$EMAIL = $ARGV[0];
+my( $USER,$REALM )  = split(/\@/,$EMAIL, 2);
+$PWD = $ARGV[1];
+
+# Novos campos
+#$TELEFONE = $ARGV[2];
+$NAS = $ARGV[3];
+
+if($REALM eq "") {
+   $REALM = $REALMDEFAULT;
+}
+
+# LOG
+$log{"user"} = $EMAIL;
+$log{"senha"} = $PWD;
+#$log{"fone"} = $TELEFONE;
+
+$ERRO_USUARIO_NAO_ENCONTRADO = 101;
+$ERRO_SENHA_INVALIDA         = 102;
+$ERRO_ACESSO_SIMULTANEO      = 103;
+$ERRO_CLIENTE_NAO_ESTA_ATIVO = 104;
+
+$acessos_simultaneos = 1;
+
+open( LOG, ">> /var/log/mbm.log" );
+
+use DBI;
+
+$dbh = DBI->connect("dbi:Pg:dbname=$DBNAME", "$DBUSER","", {
+                   PrintError => 0,RaiseError => 0,
+                   AutoCommit => 1
+             })
+   || die "Can't connect to $DBNAME: $DBI::errstr";
+
+$sth = $dbh->prepare( q{
+
+SELECT
+   senha,status,ipaddr
+FROM
+   bmtb_cliente c
+WHERE
+   c.username ilike ?
+
+}) || die "Can't prepare statement: $DBI::errstr";
+
+$rc = $sth->execute($USER) 
+   || die "Can't execute statement: $DBI::errstr";
+
+$sth->bind_columns(undef, \$senha,\$status,\$ipaddr);
+
+if( $sth->rows eq 0 ) {
+   $log{"tipo_erro"} = $ERRO_USUARIO_NAO_ENCONTRADO;
+   $log{"mensagem"} = "Usuário não encontrado";
+   print LOG "ERRO [CNE]"; 
+} else {
+
+   while ($sth->fetch()) {
+      print LOG "[$USER][$PWD]: ";
+      if( $status ne "A" ) {
+         $ret = $ERRO_CLIENTE_NAO_ESTA_ATIVO;
+         print LOG "ERRO [CNA]";
+      } else {
+         if ($PWD eq $senha) {
+            print LOG "PWOK! ";
+            # Verifica os acessos simultaneos baseado na contagem do número de sessoes abertas
+
+            $sth2 = $dbh->prepare( q{
+   
+            SELECT
+               session_id, ip, nas, telefone
+            FROM
+              bmtb_log_acesso
+            WHERE
+               username ilike ?
+               AND logout is null
+
+
+                     }) || die "Can't prepare statement: $DBI::errstr";
+
+            $rc2 = $sth2->execute($USER) 
+               || die "Can't execute statement: $DBI::errstr";
+
+            $sth2->bind_columns(undef, \$session_id,\$ip,\$nas,\$fone);
+            print LOG "st->rews: " . $sth->rows . " ";
+            if( $sth2->rows eq 0 ) {
+               $ret = $GRANTACCESS;
+               print LOG "OK";
+            } else {
+               print LOG "ENC! ";
+               open(PIDLIST,"/usr/local/mbm/var/pppoe.pl.".$NAS) || print LOG "ERRAA! "; 
+               while(<PIDLIST>) {
+                  $linha = $_;
+                  print "LOG [pl: $linha] "; 
+                  @pids = split(/ /,$linha);
+                  for($x=0;$x<@pids;$x++) {
+                     $pid{@pids[$x]} = true;
+                  }
+               }
+               close(PIDLIST);   
+
+               while($sth2->fetch()) {
+                  $tmp = split(/\-/,$session_id);
+                  $pidConn = $tmp[0];
+                  print LOG "piC: $picConn ";
+                  if( $pid{$pidConn} ) {
+                     $log{"tipo_erro"} = $ERRO_ACESSO_SIMULTANEO;
+                     $log{"mensagem"} = "Número de conexões excedido";
+                     print LOG "pidConn!" ;
+                  } else {
+                     $ret = $GRANTACCESS;
+                     system("/usr/local/mbm/bin/mbm-radius-acct STOP $session_id '$USER' '$ip' '$nas' '$fone' '-1'");
+                  }
+               }
+            }
+
+         } else {
+            print LOG "ERRO [SI]: [$USER][$PWD]";
+            $log{"tipo_erro"} = $ERRO_SENHA_INVALIDA;
+            $log{"mensagem"} = "Senha inválida. Senha cadastrada: [$senha]";
+         }
+      }
+   }
+}
+print LOG "\n";
+
+#if( $log{"tipo_erro"} gt 0 ){
+#   $sth = $dbh->prepare( q{
+#                INSERT INTO lgtb_error (username,senha,telefone,tipo_erro,descr)
+#                VALUES(?,?,?,?,?)
+#
+#         }) || die "Can't prepare statement: $DBI::errstr";
+#
+#   $rc = $sth->execute($log{"user"}, $log{"senha"}, $log{"fone"}, $log{"tipo_erro"}, $log{"mensagem"} );
+#}
+
+
+#close(LOG);
+$sth->finish;
+$rc  = $dbh->disconnect || warn $dbh->errstr;
+
+if( $ret eq 0 )  {
+   print << "RESPOSTA";
+Framed-IP-Address := $ipaddr
+Framed-Compression = Van-Jacobsen-TCP-IP
+Framed-Protocol = PPP
+Service-Type = Framed-User
+RESPOSTA
+} else {
+#   print 'Reply-Message = "\r\nVem pagar a conta safado!!\r\n';
+}
+exit $ret;
