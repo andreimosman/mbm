@@ -5,7 +5,7 @@
 <meta name="GENERATOR" content="Microsoft FrontPage 5.0">
 <meta name="ProgId" content="FrontPage.Editor.Document">
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>MBM {versao_mbm} :: Mosman Bandwidth Manager</title>
+<title>MBM {$versao_mbm} :: Mosman Bandwidth Manager</title>
 </head>
 
 <body topmargin="0" leftmargin="0" link="#000000" vlink="#000000" alink="#000000" bgcolor="#FFFFFF">
@@ -16,8 +16,8 @@
   </tr>
 <tr>
     <td width="100%"><blockquote><b><font face="Arial" size="2">
-<a href="{SELF}?sessao=home">home</a> | <a href="{SELF}?sessao=listaInterfaces">interface</a> | <a href="{SELF}?sessao=listaServicos">serviços</a>
-    | <a href="{SELF}?sessao=listaIPs">IPs</a> |  <a href="{SELF}?sessao=atualizarSistema">atualizar sistema</a> </font></b></td>
+<a href="{$smarty.server.PHP_SELF}?sessao=home">home</a> | <a href="{$smarty.server.PHP_SELF}?sessao=listaInterfaces">interface</a> | <a href="{$smarty.server.PHP_SELF}?sessao=listaServicos">serviços</a>
+    | <a href="{$smarty.server.PHP_SELF}?sessao=listaIPs">IPs</a> |  <a href="{$smarty.server.PHP_SELF}?sessao=atualizarSistema">atualizar sistema</a> </font></b></td>
   </tr>
   <tr>
     <td width="100%">

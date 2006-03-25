@@ -9,6 +9,19 @@
 
    require_once( $PATHS["lib"] . "/altq-util.inc" );
    
+   // REQUEST dos parametros - INICIO
+   
+	$oper = @$_REQUEST["oper"];
+	$userAdmin = $_SESSION["sessLogin"];   
+    $arquivo = @$_REQUEST["arquivo"];
+    //$dir = @$_REQUEST["dir"];
+    $confirma = @$_REQUEST["confirma"];
+    //$sufixo = @$_REQUEST["sufixo"];
+   
+   // REQUEST dos parametros - FINAL
+   
+   
+   
    function copiaBackup($arquivo,$dir,$sufixo) {
       if( !is_dir( $dir ) ) {
          $mask = umask(0);
@@ -29,9 +42,9 @@
       $logger->registra($bd,$sessUID,"ATUALIZAR");
       
       // $usarTemplates = 0;
-      $sArqTemplate = $sDirTemplate."/atualiza_configuracao.tpl";
+      $sArqTemplate = "atualiza_configuracao.tpl";
       $resposta = "";
-      $tplVars = "SELF,resposta";
+      $tplVars = "SELF,resposta,userAdmin";
 
 
       $datahora = date("Y-M-d/H-i-s");
@@ -663,8 +676,8 @@
       pclose($fp);
 
    } else {
-      $tplVars = "SELF";
+      $tplVars = "SELF,userAdmin";
       $SELF = $PHP_SELF;
-      $sArqTemplate = $sDirTemplate."/confirmar_atualizacao.tpl";                   
+      $sArqTemplate = "confirmar_atualizacao.tpl";                   
    }
 ?>

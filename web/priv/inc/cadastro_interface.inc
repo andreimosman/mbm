@@ -6,6 +6,26 @@
     * Autor; Andrei de Oliveira Mosman
     * Email: mosman@mosman.com.br / andreimosman@hotmail.com
     */
+    
+    // REQUEST parametros -INICIO
+    
+    $sessao = @$_REQUEST["sessao"];
+    $tipo_interface = @$_REQUEST["tipo_interface"];
+    $tipo_banda = @$_REQUEST["tipo_banda"];
+    $oper = @$_REQUEST["oper"];
+    $userAdmin = $_SESSION["sessLogin"];
+    
+    $sErro = "";
+    
+    
+    
+    // REQUEST parametros - FINAL
+    
+    
+    
+    
+    
+    
 
    $oldTplVars = $tplVars;
 
@@ -14,10 +34,10 @@
    // Variáveis de exibição
    $tplVars .= ",tp_banda_select,tp_if_select,submit";
    // Identifica a operação que eu está sendo executada (via hidden)
-   $tplVars .= ",oper";
+   $tplVars .= ",oper,userAdmin";
 
 
-   $sArqTemplate = $sDirTemplate."/cadastro_interface.tpl";
+   $sArqTemplate = "cadastro_interface.tpl";
    
    $registroEncontrado = 0;
    $bExibirListagem = 0;
@@ -106,7 +126,7 @@
        *******************************/
 
       // Tenta inserir no banco, caso contrário reporta o erro.
-      
+      $sErro = "";
       $camposEsquecidos = array();
       
       // Verifica os campos obrigatórios
@@ -277,11 +297,11 @@
                $bgcolor = $bgcolor == $bgcolor1 ? $bgcolor2 : $bgcolor1;
             }
             
-            $tplVars .= ($tplVars ? ",":"") . "nenhum,desc_filtro,filtro";
+            $tplVars .= ($tplVars ? ",":"") . "nenhum,desc_filtro,filtro,userAdmin";
             
             $tplLoops[] = "lista_interfaces";
             
-            $sArqTemplate = $sDirTemplate."/lista_interfaces.tpl";
+            $sArqTemplate = "lista_interfaces.tpl";
             
          } else {
             $oper = "efetuaAlteracao";

@@ -1,4 +1,5 @@
 <script language="JavaScript1.2">
+{literal}
 function checa(){
 
 			var  csenha, cconfsenha, erro;
@@ -24,13 +25,13 @@ function checa(){
 	return true;
 }
 
-
+{/literal}
 </script>
 <br><br>
 <table width="500" border="0" align="center" cellpadding="0" cellspacing="2">
   <tr>
     <td align="center"><font face="Arial, Helvetica, sans-serif"><strong>Altera&ccedil;&atilde;o
-      de Senha</strong><br>Usuário: {username}</font></td>
+      de Senha</strong><br>Usuário: {$userAdmin}</font></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

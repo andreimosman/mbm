@@ -26,21 +26,21 @@
     </tr>
     <loop name="lista_IPs"> 
     <tr> 
-      <td bgcolor="{bgcolorI}"><a href="{SELF}?sessao=alteracaoIP&ipaddr={ipaddr}"><font face="arial" size="-1">{ipaddr}</font></a></td>
-      <td bgcolor="{bgcolorI}"><a href="{SELF}?sessao=alteracaoIP&ipaddr={ipaddr}"><font face="arial" size="-1" color="#FF0000"><b>{banda_up}{tp_up}<font color="008800">{banda_alt_up}</font></b></a></td>
-      <td bgcolor="{bgcolorI}"><a href="{SELF}?sessao=alteracaoIP&ipaddr={ipaddr}"><font face="arial" size="-1" color="#FF0000"><b>{banda_down}{tp_down}<font color="008800">{banda_alt_down}</font></b></a></td>
+      <td bgcolor="{$bgcolorI}"><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoIP&ipaddr={$ipaddr}"><font face="arial" size="-1">{$ipaddr}</font></a></td>
+      <td bgcolor="{$bgcolorI}"><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoIP&ipaddr={$ipaddr}"><font face="arial" size="-1" color="#FF0000"><b>{banda_up}{tp_up}<font color="008800">{banda_alt_up}</font></b></a></td>
+      <td bgcolor="{$bgcolorI}"><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoIP&ipaddr={$ipaddr}"><font face="arial" size="-1" color="#FF0000"><b>{banda_down}{tp_down}<font color="008800">{banda_alt_down}</font></b></a></td>
       <!-- Oper do IP -->
-      <td bgcolor="{bgcolorI}"><a href="javascript:janelaEstatisticas('{dir}');"><img src="imagens/estatisticas.gif" border=0 width="16" height="16" ALT="[stats]"></a>{operI}</td>
-      <td bgcolor="{bgcolorC}"><a href="{SELF}?sessao=alteracaoCliente&username={cliente}"><font face="arial" size="-1">{cliente}</font></a></td>
-      <td bgcolor="{bgcolorC}"><a href="{SELF}?sessao=alteracaoCliente&username={cliente}"><font face="arial" size="-1">{mac}</font></a></td>
-      <td bgcolor="{bgcolorC}"><a href="{SELF}?sessao=alteracaoCliente&username={cliente}"><font face="arial" size="-1" color="{cor_status}">{strstatus}</font></a><font face="arial" size="-1" color="{cor_status}">{st_nao_ativado}</font></td>
+      <td bgcolor="{$bgcolorI}"><a href="javascript:janelaEstatisticas('{dir}');"><img src="imagens/estatisticas.gif" border=0 width="16" height="16" ALT="[stats]"></a>{operI}</td>
+      <td bgcolor="{$bgcolorC}"><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoCliente&username={cliente}"><font face="arial" size="-1">{cliente}</font></a></td>
+      <td bgcolor="{$bgcolorC}"><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoCliente&username={cliente}"><font face="arial" size="-1">{mac}</font></a></td>
+      <td bgcolor="{$bgcolorC}"><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoCliente&username={cliente}"><font face="arial" size="-1" color="{cor_status}">{strstatus}</font></a><font face="arial" size="-1" color="{cor_status}">{st_nao_ativado}</font></td>
       <!-- Oper do cliente -->
-      <td bgcolor="{bgcolorC}">{operC}</td>
-      <!--<td><a href="{SELF}?sessao=excluirCliente&username={cliente}"><img border="0" src="imagens/lixo.gif" width="15" height="16" alt="Excluir!!!"></a></td>-->
+      <td bgcolor="{$bgcolorC}">{operC}</td>
+      <!--<td><a href="{$smarty.server.PHP_SELF}?sessao=excluirCliente&username={cliente}"><img border="0" src="imagens/lixo.gif" width="15" height="16" alt="Excluir!!!"></a></td>-->
     </tr>
     {lynx_hr} </loop name="lista_IPs"> 
 </table>
-<div align="center"><font color="#FF0000" face="arial">{nenhum}</font> 
+<div align="center"><font color="#FF0000" face="arial">{$nenhum}</font> 
   </center> 
 </div>
 </body>

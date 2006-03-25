@@ -14,12 +14,12 @@
       <td><font face="arial"><b>login</b></font></td>
     </tr>
     <loop name="lista_online"> 
-    <tr bgcolor="{bgcolor}"> 
-      <td><font face="arial" size=-2>{nas}</font></td>
-      <td><font face="arial" size=-2>{ipaddr}</font></td>
-      <td><font face="arial" size=-2>{username}</font></td>
-      <td><font face="arial" size=-2>{login}</font></td>
+    <tr bgcolor="{$bgcolor}"> 
+      <td><font face="arial" size=-2>{$nas}</font></td>
+      <td><font face="arial" size=-2>{$ipaddr}</font></td>
+      <td><font face="arial" size=-2>{$username}</font></td>
+      <td><font face="arial" size=-2>{$login}</font></td>
     </tr>
     </loop name="lista_online"> 
   </table>
-  <font color="#FF0000" face="arial">{nenhum}</font> </div>
+  <font color="#FF0000" face="arial">{$nenhum}</font> </div>

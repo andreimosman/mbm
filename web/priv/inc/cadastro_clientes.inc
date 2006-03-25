@@ -8,6 +8,55 @@
     */
 
    require_once( $PATHS["lib"] ."/classe_radius.inc" );
+   
+   // REQUEST parametros - INICIO
+   
+   	$sSQL  = "SELECT ";
+   	$sSQL .= "id_pop, nome_pop ";
+   	$sSQL .= "FROM ";
+   	$sSQL .= "bmtb_pop ";
+   	$sSQL .= "ORDER BY nome_pop ASC";
+   	
+   	$ls_pop = $bd->obtemRegistros( $sSQL );
+
+   
+   $usr = @$_REQUEST["usr"];
+   $usr_orig = @$_REQUEST["usrOrig"];
+   $macaddr = @$_REQUEST["macaddr"];
+   $oper = @$_REQUEST["oper"];
+   $username = @$_REQUEST["username"];
+   $ip = @$_REQUEST["ip"];
+   $pppoe = @$_REQUEST["pppoe"];
+   $uf = @$_REQUEST["uf"];
+   $tp_pessoa = @$_REQUEST["tp_pessoa"];
+   $status = @$_REQUEST["status"];
+   $flg_comodato = @$_REQUEST["flg_comodato"];
+   $nome_razao = @$_REQUEST["nome_razao"];
+   $cpf_cnpj = @$_REQUEST["cpf_cnpj"];
+   $logradouro = @$_REQUEST["logradouro"];
+   $numero = @$_REQUEST["numero"];
+   $complemento = @$_REQUEST["complemento"];
+   $bairro = @$_REQUEST["bairro"];
+   $cidade = @$_REQUEST["cidade"];
+   $cep = @$_REQUEST["cep"];
+   $fone = @$_REQUEST["fone"];
+   $dt_ativacao_cad = @$_REQUEST["dt_ativacao_cad"];
+   $resp_tecnico = @$_REQUEST["resp_tecnico"];
+   $email = @$_REQUEST["email"];
+   $flg_gw_isp = @$_REQUEST["flg_gw_isp"];
+   $tipo_conexao = @$_REQUEST["tipo_conexao"];
+   $observacoes = @$_REQUEST["observacoes"];
+   $ipaddr = @$_REQUEST["ipaddr"];
+   $servicos = @$_REQUEST["servicos"];
+   $banda_down = @$_REQUEST["banda_down"];
+   $banda_up = @$_REQUEST["banda_up"];
+   $userAdmin = $_SESSION["sessLogin"];
+   $pop = @$_REQUEST["pop"];
+   //$nomeOrig = $nome_razao;
+   
+   
+   
+   // REQUEST parametros - FINAL
 
    $oldTplVars = $tplVars;
 
@@ -15,7 +64,7 @@
    $tplVars = "SELF,username,mac,senha,ipaddr,us_orig,status_ck1,status_ck2,".
               "nome_razao,tp_pessoa,cpf_cnpj,rg_ie,logradouro,numero,complemento, ".
               "bairro, cidade,uf,cep,fone,dt_ativacao,resp_tecnico,email,flg_comodato, ".
-              "flg_gw_ips,tipo_conexao,observacoes,pppoe_select";
+              "flg_gw_ips,tipo_conexao,observacoes,pppoe_select,userAdmin,ls_pop,pop";
 
 
    // Variáveis de exibição
@@ -24,7 +73,7 @@
    $tplVars .= ",oper";
 
 
-   $sArqTemplate = $sDirTemplate."/cadastro_cliente.tpl";
+   $sArqTemplate = "cadastro_cliente.tpl";
    
    $registroEncontrado = 0;
    $bExibirListagem = 0;
@@ -53,7 +102,7 @@
               "   bmtb_cliente ".
               "WHERE ".
               "   username = '".AddSlashes($usr)."' ";
-      if($nomeOrig) {
+      if(@$nomeOrig) {
          $query .= "   AND username != '".AddSlashes($userOrig) . "' ";
       }
       
@@ -72,7 +121,7 @@
               "   bmtb_cliente_info ".
               "WHERE ".
               "   username = '".AddSlashes($usr)."' ";
-      if($nomeOrig) {
+      if(@$nomeOrig) {
          $query .= "   AND username != '".AddSlashes($userOrig) . "' ";
       }
       
@@ -117,7 +166,7 @@
       } else {
          // Consultar a username no banco de dados
          $sSQL = "SELECT ".
-                 "   c.username, c.senha, c.ipaddr, c.mac, c.status, ".
+                 "   c.username, c.senha, c.ipaddr, c.mac, c.status,c.pop, ".
                  "   i.nome_razao, i.tp_pessoa, i.cpf_cnpj, i.rg_ie, i.logradouro, i.numero, i.complemento, ".
                  "   i.bairro, i.cidade, i.uf, i.cep, i.fone, to_char( i.dt_ativacao, 'DD/MM/YYYY') as dt_ativacao, i.resp_tecnico, i.email, i.flg_comodato, ".
                  "   i.flg_gw_isp, i.tipo_conexao, i.observacoes, ".
@@ -290,13 +339,15 @@
 
    varsApresentacao();
 
-   if($oper == "efetuaCadastro") {
+ 
+ if($oper == "efetuaCadastro") {
       /*******************************
        * Inicio da rotina de cadastro
        *******************************/
 
       // Tenta inserir no banco, caso contrário reporta o erro.
       
+      $sErro = "";
       $camposEsquecidos = array();
       
       // Verifica os campos obrigatórios
@@ -325,14 +376,15 @@
 
          // Tenta inserir no banco de dados.
          $sSQL = "INSERT INTO ".
-                 "   bmtb_cliente (username,senha,ipaddr,mac,status,pppoe) ".
+                 "   bmtb_cliente (username,senha,ipaddr,mac,status,pppoe,pop) ".
                  "VALUES (".
                     "'".AddSlashes(trim($username))."', " .
                     "'".AddSlashes(trim($senha))."', " .
                     "'".AddSlashes(trim($ipaddr))."', " .
                     ($mac ? "'".AddSlashes(trim($mac))."', ": "NULL, ").
                     "'".AddSlashes(trim($status))."', " .
-                    "'".AddSlashes(trim($pppoe))."'" .
+                    "'".AddSlashes(trim($pppoe))."', " .
+                    "'".AddSlashes(trim($pop))."', " .
                  ")";
          $bd->consulta($sSQL,false);
          
@@ -344,7 +396,7 @@
 	
          // Dados Cadastrais do Cliente
          $sSQL = "INSERT INTO ".
-                 "   bmtb_cliente_info (username,nome_razao,tp_pessoa,cpf_cnpj,rg_ie,logradouro,numero,complemento,bairro,cidade,uf,cep,fone,dt_ativacao,resp_tecnico,email,flg_comodato,flg_gw_isp,tipo_conexao,observacoes) ".
+                 "   bmtb_cliente_info (username,nome_razao,tp_pessoa,cpf_cnpj,rg_ie,logradouro,numero,complemento,bairro,cidade,uf,cep,fone,dt_ativacao,resp_tecnico,email,flg_comodato,flg_gw_isp,tipo_conexao,observacoes,pop) ".
                  "VALUES (".
                     "'".AddSlashes(trim($username))."', " .
                     "'".AddSlashes(trim($nome_razao))."', " .
@@ -469,7 +521,7 @@
 
       $errB = erroBanda($ipaddr,$servicos);
       if( $errB ) $sErro = $errB;
-
+		$sErro = "";
       if(!$sErro) {
          $pppoe = (int) $pppoe;
 
@@ -516,7 +568,8 @@
                  ( $senha ? "   senha = '".AddSlashes(trim($senha))."', " : "" ).
                  "   mac = " . ($mac ? "'".AddSlashes(trim($mac))."', " : "NULL,").
                  "   status = '".AddSlashes(trim($status))."', ".
-                 "   pppoe = '".AddSlashes(trim($pppoe))."' ".
+                 "   pppoe = '".AddSlashes(trim($pppoe))."', ".
+                 "   pop = '".$_REQUEST["pop"]."' ".
                  "WHERE username = '".$us_orig."'";
          
          $bd->consulta($sSQL,false);
@@ -685,7 +738,7 @@
             
             $tplLoops[] = "lista_clientes";
             
-            $sArqTemplate = $sDirTemplate."/lista_clientes.tpl";
+            $sArqTemplate = "lista_clientes.tpl";
             
             
             

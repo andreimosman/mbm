@@ -22,21 +22,21 @@ function checarIP(ip) {
    }
 
    if( !ehIP && !ehRede ) return false;
-  
+
    var arrRede = ip.split("/");
    // Testar a parte do IP
    if( !checarIP(arrRede[0]) ) return false;
 
    var bitsMask = parseInt(arrRede[1]);
-   if( bitsMask > 32 || bitsMask < 0 ) return false; 
-   
+   if( bitsMask > 32 || bitsMask < 0 ) return false;
+
    return true;
 }
 
 function checarValorBanda(num,tp) {
    var expressaoRegular=/(^\d+$)/; // O campo não pode ser vazio
    if( !expressaoRegular.test(num) ) return false;
-   
+
    var banda = parseInt( num ) * ( tp == "" ? 1: (tp == "K" ? 1024:1024^2) );
    return( banda > 6144 || banda == 0 );
 }
@@ -47,7 +47,7 @@ function checaFormulario() {
       form.ipaddr.focus();
       return false;
    }
-   
+
    if( !checarValorBanda( form.banda_up.value, form.tipo_banda_up.value ) ) {
       window.alert("O campo 'Banda de Upload' deve ser numérico. Utilize 0 para bloquear o IP ou uma banda superior a 6Kbps.");
       form.banda_up.focus();
@@ -59,7 +59,7 @@ function checaFormulario() {
       form.banda_down.focus();
       return false;
    }
-   
+
    if( (parseInt( form.banda_down.value ) == 0 || parseInt( form.banda_up.value ) == 0) && parseInt( form.banda_up.value) != parseInt(form.banda_down.value) ) {
       window.alert("Para bloquear o IP utilize 0 nas bandas de download e upload respectivamente.");
       window.banda_down.focus();
@@ -72,40 +72,40 @@ function checaFormulario() {
 <font face="arial" size="4"><b>IP</b></font>
 <hr size=1 width="500" color="#000000" align="left">
 
-<form method="post" action="{SELF}" name="form" onSubmit="return checaFormulario();">
-<input type="hidden" name="sessao" value="{sessao}">
-<input type="hidden" name="oper" value="{oper}">
-<input type="hidden" name="ip_orig" value="{ip_orig}">
-<font face="arial" size="-1" color="#FF0000"><b>{sErro}</b></font>
+<form method="post" action="{$smarty.server.PHP_SELF}" name="form" onSubmit="return checaFormulario();">
+<input type="hidden" name="sessao" value="{$sessao}">
+<input type="hidden" name="oper" value="{$oper}">
+<input type="hidden" name="ip_orig" value="{$ip_orig}">
+<font face="arial" size="-1" color="#FF0000"><b>{$sErro}</b></font>
 <font face="arial" size="-1" color="#0000FF"><b>{sMensagem}</b></font>
 <table border=0 width="500">
    <tr>
       <td><font face="arial" size="-1"><b>IP (host/net):</b></font></td>
-      <td align="left"><input type="text" name="ipaddr" value="{ipaddr}" maxlength="18"></td>
+      <td align="left"><input type="text" name="ipaddr" value="{$ipaddr}" maxlength="18"></td>
    </tr>
    <tr>
       <td><font face="arial" size="-1"><b>Interface Externa:</b></font></td>
-      <td align="left">{ife_select}</td>
+      <td align="left">{$ife_select}</td>
    </tr>
    <tr>
       <td><font face="arial" size="-1"><b>Banda de Upload:</b></font></td>
-      <td align="left"><input type="text" name="banda_up" value="{banda_up}">{tp_bu_select}</td>
+      <td align="left"><input type="text" name="banda_up" value="{$banda_up}">{tp_bu_select}</td>
    </tr>
    <tr>
       <td><font face="arial" size="-1"><b>Interface Interna:</b></font></td>
-      <td align="left">{ifi_select}</td>
+      <td align="left">{$ifi_select}</td>
    </tr>
    <tr>
       <td><font face="arial" size="-1"><b>Banda de Download:</b></font></td>
-      <td align="left"><input type="text" name="banda_down" value="{banda_down}">{tp_bd_select}</td>
+      <td align="left"><input type="text" name="banda_down" value="{$banda_down}">{tp_bd_select}</td>
    </tr>
    <tr>
       <td>&nbsp;</td>
-      <td align="left"><input type="submit" name="submit" value="{submit}"></td>
+      <td align="left"><input type="submit" name="submit" value="{$submit}"></td>
    </tr>
 
 </table>
 </form>
 <br><br>
 <font face="arial" size="2">
-<a href="{SELF}?sessao=listaIPs">voltar</a>
+<a href="{$smarty.server.PHP_SELF}?sessao=listaIPs">voltar</a>

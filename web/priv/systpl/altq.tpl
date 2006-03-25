@@ -1,5 +1,5 @@
 ####################################################################################
-# Arquivo de configuração gerado pelo MBM (Mosman Bandwidth Manager) {versao_mbm}  #
+# Arquivo de configuração gerado pelo MBM (Mosman Bandwidth Manager) {$versao_mbm}  #
 # CopyRight(c) mosman.com.br - Todos os direitos reservados                        #
 # http://www.mosman.com.br/                                                        #
 # mailto: mbm@mosman.com.br / mosman@mosman.com.br / suporte@mosman.com.br         #
@@ -16,7 +16,7 @@ class cbq {interface} def root borrow pbandwidth 95 default
 </loop name="interfaces">
 
 <loop name="altq_ips">
-# {username} ({str_status})
+# {$username} ({$str_status})
 #####################
 class cbq {interface_externa} {altq_label} def exactbandwidth {banda_up}{tipo_banda_up} 
 filter {interface_externa} {altq_label} 0 0 {alvo} 0 0

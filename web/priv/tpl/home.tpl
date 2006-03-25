@@ -1,11 +1,11 @@
 <br><br><table width="600" border="0" align="center" cellpadding="3" cellspacing="2">
   <tr>
-    <td><p align="center"><b><font face="Arial">Mosman Bandwidth Manager v.{versao_mbm}</font></b></p>
+    <td><p align="center"><b><font face="Arial">Mosman Bandwidth Manager v.{$versao_mbm}</font></b></p>
       <p align="justify"><font face="Arial">O MBM foi desenvolvido para controle
         e gerenciamento dos acessos remotos.<br>
         Permite ao administrador controlar a quantidade de banda e acesso aos
         serviços de cada cliente.</font></p>
-      <p align="justify"><font face="Arial">Na versão {versao_mbm} estão disponíveis
+      <p align="justify"><font face="Arial">Na versão {$versao_mbm} estão disponíveis
         as opções:</font></p>
       <p align="justify"><font face="Arial"> - Cadastros de Interfaces, Serviços
         e IP's (hosts e redes).<br>

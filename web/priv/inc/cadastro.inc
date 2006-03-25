@@ -8,6 +8,32 @@
 	require_once( $PATHS["lib"] . "/midlib_sql.inc" );
 	require_once( $PATHS["lib"] . "/functions_cadastro.inc" );
 	require_once( $PATHS["lib"] . "/functions_html.inc" );
+	
+	// REQUEST parametros - INICIO
+	$faz_cadastro = @$_REQUEST["faz_cadastro"];
+	$username = @$_REQUEST["username"];
+	$desejo = @$_REQUEST["desejo"];
+	$dtNasc = @$_REQUEST["$dtNasc"];
+	$nome = @$_REQUEST["nome"];
+	$senha = @$_REQUEST["senha"];
+	$lembrete = @$_REQUEST["lembrete"];
+	$sexo = @$_REQUEST["sexo"];
+	$profissao = @$_REQUEST["profissao"];
+	$renda = @$_REQUEST["renda"];
+	$escolaridade = @$_REQUEST["escolaridade"];
+	$cidade = @$_REQUEST["cidade"];
+	$estado = @$_REQUEST["estado"];
+	$cep = @$_REQUEST["cep"];
+	$envia_foto = @$_REQUEST["envia_foto"];
+	$usuario_foto = @$_REQUEST["usuario_foto"];
+	$foto_type = @$_REQUEST["foto_type"];
+	$userAdmin = $_SESSION["sessLogin"];
+    
+	
+	
+	// REQUEST parametros - FINAL
+	
+	
 
 	/* Arquivo de template */
 	$sArqTemplate = $sDirTemplate."/cadastro.tpl";
@@ -204,7 +230,7 @@
 		$desejo_ck = "";
 	}
 
-	$tplVars = "listaEstados,listaFaixas,listaProfissoes,listaEscolaridades,listaSexos,listaFuma,listaBebe,username,senha,senha1,nome,sexo,dtNasc,cidade,cep,foto,desejo_ck,lembrete,sErro,foto,foto_name,foto_size,foto_type,usuario_foto,msgOk";
+	$tplVars = "userAdmin,listaEstados,listaFaixas,listaProfissoes,listaEscolaridades,listaSexos,listaFuma,listaBebe,username,senha,senha1,nome,sexo,dtNasc,cidade,cep,foto,desejo_ck,lembrete,sErro,foto,foto_name,foto_size,foto_type,usuario_foto,msgOk";
 
 
 

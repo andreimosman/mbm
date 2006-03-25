@@ -1,4 +1,5 @@
 <style type="text/css">
+{literal}
 <!--
 body {
 	margin-left: 0px;
@@ -11,6 +12,7 @@ body {
 	font-weight: bold;
 }
 -->
+{/literal}
 </style>
 <link href="estilo.css" rel="stylesheet" type="text/css" />
 
@@ -26,17 +28,17 @@ body {
         </table></td>
       </tr>
       <tr>
-        <td height="100%" align="center" valign="middle"><form method="post" action="{SELF}">
+        <td height="100%" align="center" valign="middle"><form method="post" action="{$smarty.server.PHP_SELF}">
           <br />
           <br />
-          <p align="center"><font face="arial" size="-1" color="#FF0000">{sErro}</font> </p>
+          <p align="center"><font face="arial" size="-1" color="#FF0000">{$sErro}</font> </p>
           <table width="200" border="0" align="center">
             <tr>
-              <td colspan="2" bgcolor="#003366"><img src="file:///Z|/public_html/mbm/web/pub/imagens/login.gif" width="250" height="30" /></td>
+              <td colspan="2" bgcolor="#003366"><img src="imagens/login.gif" width="250" height="30" /></td>
             </tr>
             <tr>
               <td align="right"><font face="arial" size="-1">username:</font></td>
-              <td><input name="login" type="text" value="{login}" size="30" /></td>
+              <td><input name="login" type="text" value="{$login}" size="30" /></td>
             </tr>
             <tr>
               <td align="right"><font face="arial" size="-1">senha:</font></td>

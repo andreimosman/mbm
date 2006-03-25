@@ -5,9 +5,9 @@
 <font face="arial" size="4"><b>Atualizar Sistema</b></font> 
 
 <hr size=1 width="500" color="#000000" align="center">
-<form method="post" action="{SELF}" onSubmit="return confirm('Confirma as Atualizações do sistema?')">
+<form method="post" action="{$smarty.server.PHP_SELF}" onSubmit="return confirm('Confirma as Atualizações do sistema?')">
   
-    <input type="hidden" name="sessao" value="{sessao}">
+    <input type="hidden" name="sessao" value="{$sessao}">
     <input type="hidden" name="oper" value="confirma">
     <font color="#CC0000" face="arial" size="2"> <b>Atenção !!!</b> </font><br>
     <br><font face="arial" size="2">

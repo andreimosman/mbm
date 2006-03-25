@@ -6,10 +6,12 @@
     * Autor; Andrei de Oliveira Mosman
     * Email: mosman@mosman.com.br / andreimosman@hotmail.com
     */
-   $tplVars = "SELF,versao_mbm";
+   $userAdmin = $_SESSION["sessLogin"];
+   
+   $tplVars = "SELF,versao_mbm,userAdmin";
    $versao_mbm = $MBM["versao"];
 
    $SELF = $PHP_SELF;
-   $sArqTemplate = $sDirTemplate."/home.tpl";
+   $sArqTemplate = "home.tpl";
 
 ?>

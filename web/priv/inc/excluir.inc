@@ -6,8 +6,20 @@
     * Autor; Andrei de Oliveira Mosman
     * Email: mosman@mosman.com.br / andreimosman@hotmail.com
     */
+    
+    // REQUEST parametros - INICIO
+    
+    $oper = @$_REQUEST["oper"];
+    $userAdmin = $_SESSION["sessLogin"];
+    
+    
+    // REQUEST parametros - FINAL
+    
+    
+    
+    
    
-   $tplVars = "SELF";
+   $tplVars = "SELF,userAdmin";
    $SELF = $PHP_SELF;
 
    /**
@@ -51,7 +63,7 @@
             if(!count($ips)) {
                $ips[0]["ipaddr"] = "Nenhum IP será excluído !!!";
             }
-            $sArqTemplate = $sDirTemplate."/confirmar_exclusao_interface.tpl";
+            $sArqTemplate = "confirmar_exclusao_interface.tpl";
          } else {
             // Excluir
             
@@ -104,7 +116,7 @@
             }
 
 
-            $sArqTemplate = $sDirTemplate."/confirmar_exclusao_interface_ok.tpl";
+            $sArqTemplate = "confirmar_exclusao_interface_ok.tpl";
 
          }
       }
@@ -135,7 +147,7 @@
             if(!count($clientes)) {
                $clientes[0]["username"] = "Nenhum cliente utiliza este filtro";
             }
-            $sArqTemplate = $sDirTemplate."/confirmar_exclusao_servico.tpl";
+            $sArqTemplate = "confirmar_exclusao_servico.tpl";
          } else {
             // Excluir
             
@@ -155,7 +167,7 @@
                $clientes[0]["username"] = "Nenhum cliente utilizava este filtro !!!";
             }
 
-            $sArqTemplate = $sDirTemplate."/confirmar_exclusao_servico_ok.tpl";
+            $sArqTemplate = "confirmar_exclusao_servico_ok.tpl";
 
          }
       }
@@ -185,7 +197,7 @@
             if(!count($clientes)) {
                $clientes[0]["username"] = "Nenhum cliente associado à este IP !!!";
             }
-            $sArqTemplate = $sDirTemplate."/confirmar_exclusao_ip.tpl";
+            $sArqTemplate = "confirmar_exclusao_ip.tpl";
          } else {
             // Excluir
             
@@ -225,7 +237,7 @@
             }
 
 
-            $sArqTemplate = $sDirTemplate."/confirmar_exclusao_ip_ok.tpl";
+            $sArqTemplate = "confirmar_exclusao_ip_ok.tpl";
          }
       }
    }
@@ -242,7 +254,7 @@
 
          if( $oper != "confirma" || $confirma != "excluir" ) {
             // Exibir tela de confirmação
-            $sArqTemplate = $sDirTemplate."/confirmar_exclusao_cliente.tpl";
+            $sArqTemplate = "confirmar_exclusao_cliente.tpl";
          } else {
             // Excluir
             
@@ -260,7 +272,7 @@
             
             // Apresentação
 
-            $sArqTemplate = $sDirTemplate."/confirmar_exclusao_cliente_ok.tpl";
+            $sArqTemplate = "confirmar_exclusao_cliente_ok.tpl";
          }
       }
    }

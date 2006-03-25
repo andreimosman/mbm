@@ -5,6 +5,21 @@
     * Funcoes utilizadas para manipular dados relevantes ao altqd.
     * Autor: Andrei de Oliveira Mosman (mosman@mosman.com.br)
     */
+    
+    // REQUESTS - INICIO
+    
+    $ip = @$_REQUEST["ip"];
+    $banda = @$_REQUEST["banda"];
+    $tipoBanda = @$_REQUEST["tipoBanda"];
+    $BandaLink = @$_REQUEST["BandaLink"];
+    $tipoBandaLink = @$_REQUEST["tipoBandaLink"];
+    $arrBandaServicos = @$_REQUEST["arrBandaServicos"];
+    
+    
+    // REQUESTS - FINAL
+    
+    
+    
 
    function obtemAlvo( $ip ) {
       if( strstr( $ip, "/" ) ) {

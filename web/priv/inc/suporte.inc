@@ -7,17 +7,22 @@
     * Email: mosman@mosman.com.br / andreimosman@hotmail.com
     */
 
+	$subsessao = @$_REQUEST["subsessao"];
+	$userAdmin = $_SESSION["sessLogin"];
+	$numdias = @$_REQUEST["numdias"];
+
+
    $oldTplVars = $tplVars;
 
    // Variáveis do formulário
-   $tplVars = "SELF,interface,if_orig,banda,tipo_banda";
+   $tplVars = "userAdmin,SELF,interface,if_orig,banda,tipo_banda";
    // Variáveis de exibição
    $tplVars .= ",tp_banda_select,tp_if_select,submit";
    // Identifica a operação que eu está sendo executada (via hidden)
    $tplVars .= ",oper";
 
 
-   $sArqTemplate = $sDirTemplate."/suporte.tpl";
+   $sArqTemplate = "suporte.tpl";
    
    $registroEncontrado = 0;
    $bExibirListagem = 0;
@@ -89,7 +94,7 @@
             
             $tplLoops[] = "lista_semcon";
             
-            $sArqTemplate = $sDirTemplate."/semcon.tpl";
+            $sArqTemplate = "semcon.tpl";
             
          }
 
@@ -131,7 +136,7 @@
             
             $tplLoops[] = "lista_online";
             
-            $sArqTemplate = $sDirTemplate."/online.tpl";
+            $sArqTemplate = "online.tpl";
             
          }
 

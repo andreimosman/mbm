@@ -1,4 +1,5 @@
 <script language="JavaScript1.2">
+{literal}
 function checa(){
 
 			var frm = document.dados;
@@ -18,18 +19,21 @@ function checa(){
 
 	return true;
 }
+{/literal}
 </script>
 
 <table width="500" border="0" align="center" cellpadding="0" cellspacing="2">
   <tr>
-    <td align="center"><font face="Arial, Helvetica, sans-serif"><strong>Altera&ccedil;&atilde;o
-      de Senha</strong><br>Usuário: {username}</font></td>
+    <td align="center"><font face="Arial, Helvetica, sans-serif"><strong><br><br>Altera&ccedil;&atilde;o
+      de Senha</strong><br>Usuário: {$userAdmin}</font></td>
+      <tr><td><hr size=1 width="500" color="#000000" align="center"></td></tr>
+
   </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td><form name="dados" method="post" action="{SELF}" onSubmit="return checa(this)">
+    <td><form name="dados" method="post" action="{$smarty.server.PHP_SELF}" onSubmit="return checa(this)">
     <input type="hidden" name="sessao" value="alterarSenha">
 	<input type="hidden" name="acao" value="alt">
         <table width="60%" border="0" align="center" cellpadding="3" cellspacing="2">

@@ -6,6 +6,29 @@
     * Autor; Andrei de Oliveira Mosman
     * Email: mosman@mosman.com.br / andreimosman@hotmail.com
     */
+    
+    //REQUEST parametros - INICIO
+    $userAdmin = $_SESSION["sessLogin"];
+    $tipo_banda_up = @$_REQUEST["tipo_banda_up"];
+    $tipo_banda_down = @$_REQUEST["tipo_banda_down"];
+    $tipo_banda_up_alt = @$_REQUEST["tipo_banda_up_alt"];
+    $tipo_banda_down_alt = @$_REQUEST["tipo_banda_down_alt"];
+    $interface_externa = @$_REQUEST["interface_externa"];
+    $interface_interna = @$_REQUEST["interface_interna"];
+    $oper = @$_REQUEST["oper"];
+    $servOrig = @$_REQUEST["servOrig"];
+    $sErro = "";
+    $numip = @$_REQUEST["numip"];
+    //$ipOrig = @$_REQUEST["ipOrig"];
+    $ip_orig = @$_REQUEST["ip_orig"];
+    $ipOrig = $ip_orig;
+    $servOrig = $ip_orig;
+    $SELF = @$_REQUEST["SELF"];
+    
+    //REQUEST parametros - FINAL
+    
+    $mensagem = "";
+    
 
    $oldTplVars = $tplVars;
 
@@ -14,10 +37,10 @@
    // Variáveis de exibição
    $tplVars .= ",tp_bua_select,tp_bda_select,tp_bd_select,tp_bu_select,ifi_select,ife_select,submit";
    // Identifica a operação que eu está sendo executada (via hidden)
-   $tplVars .= ",oper";
+   $tplVars .= ",oper,userAdmin";
 
 
-   $sArqTemplate = $sDirTemplate."/cadastro_ip.tpl";
+   $sArqTemplate = "cadastro_ip.tpl";
    
    $registroEncontrado = 0;
    $bExibirListagem = 0;
@@ -35,7 +58,7 @@
               "   bmtb_ip ".
               "WHERE ".
               "   ipaddr = '".AddSlashes($numip)."' ";
-      if($servOrig) {
+      if(@$servOrig) {
          $query .= "   AND ipaddr != '".AddSlashes($ipOrig) . "' ";
       }
       
@@ -102,7 +125,7 @@
       global $bd;
 
       // Obtem a informação da banda utilizada por este IP
-      $sSQL .= "SELECT ";
+      $sSQL  = "SELECT ";
       $sSQL .= "   c.username, cs.banda_up, cs.tipo_banda_up, cs.banda_down, cs.tipo_banda_down ";
       $sSQL .= "FROM ";
       $sSQL .= "   bmtb_ip ip, bmtb_cliente c, bmtb_cliente_servico cs ";
@@ -499,11 +522,11 @@
 
 				$mensagem = "<font face=arial size=2 color=black>Lista Completa de IPS</font>";
 				$mrtgweb = $mrtgCONF["webbase"];
-				$tplVars .= ($tplVars ? ",":"") . "mensagem,nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
+				$tplVars .= ($tplVars ? ",":"") . "userAdmin,mensagem,nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
 
 				$tplLoops[] = "lista_ips";
 
-				$sArqTemplate = $sDirTemplate."/lista_ips.tpl";
+				$sArqTemplate = "lista_ips.tpl";
 
             
             
@@ -629,11 +652,11 @@
 
 				$mensagem = "<font face=arial size=2 color=black>Lista de Ips contendo <b>$chave</b> no campo <b>$cond</b></font>";
 				$mrtgweb = $mrtgCONF["webbase"];
-				$tplVars .= ($tplVars ? ",":"") . "mensagem,nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
+				$tplVars .= ($tplVars ? ",":"") . "userAdmin,mensagem,nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
 
 				$tplLoops[] = "lista_ips";
 
-				$sArqTemplate = $sDirTemplate."/lista_ips.tpl";         	
+				$sArqTemplate = "lista_ips.tpl";         	
 
          	
          	
@@ -642,10 +665,10 @@
          	}else{
          	    //$mensagem = "Lista de Ips contendo o $chave no campo $cond";
 			    $mrtgweb = $mrtgCONF["webbase"];
-			    $tplVars .= ($tplVars ? ",":"") . "nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
+			    $tplVars .= ($tplVars ? ",":"") . "userAdmin,nenhum,desc_filtro,filtro,clientes_ativos,clientes_bloqueados,ips_disponiveis,ips_cadastrados,mrtgweb,lynx_hr";
 			            
 			    			            
-			    $sArqTemplate = $sDirTemplate."/lista_ips.tpl";         	
+			    $sArqTemplate = "lista_ips.tpl";         	
 
          	}
          	

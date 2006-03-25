@@ -9,9 +9,17 @@
 	 * consultoria@mosman.com.br
 	 */
 
-
+	
+	
+	
+	
 	/* arquivo contendo as informações do path */
 	require_once( "paths.inc" );
+	
+	
+	/* chama smarty como template */
+
+	require_once("MTemplate.class.php");
 
 	/* configuracoes */
 	require_once( $PATHS["etc"] . "/config.inc" );
@@ -30,14 +38,22 @@
 	
 
 	// Definicoes basicas	
-	$sessao = @$_GET['sessao'];
+	
+	$sessao = @$_REQUEST['sessao'];
+	$login = @$_REQUEST["login"];
+	$senha = @$_REQUEST["senha"];
+	
+	
 	$asParseLoop = array();
 	
 	
 	
 	
-	$pgTPL = new template;
+	//$pgTPL = new template;
+	
+	
 	$sDirTemplate = $PATHS["tpl"];
+	$pgTPL = new MTemplate($sDirTemplate);
 	$sArqTemplate = "";
 
 	$tplLoops = array();
@@ -92,6 +108,7 @@
 	         $sSQL .= "WHERE ";
 	         $sSQL .= "   login = '".$login."' ";
 	         $sSQL .= "   AND senha = '".$senha."' ";
+	         $sSQL .= "   AND status = 't' ";
 	         
 	         $resultado = $bd->obtemRegistros($sSQL);
 	         //echo "SQL LOGIN: $sSQL <br>\n";
@@ -150,7 +167,7 @@
 	   $sessTipoLogin = "";
 	   $sessTipoConta = "";
 	   $sessIPCli = "";
-	   $sArqTemplate = $PATHS["tpl"] . "/login.tpl";
+	   $sArqTemplate = "login.tpl";
 	   $tplVars = "login";
 	   $headerAlternativo = "vazio.tpl";
 	   $footerAlternativo = "vazio.tpl";
@@ -177,10 +194,12 @@
 			include( $PATHS["inc"] . "/excluir.inc" );
 		} else if( $sessao == "suporte" ) {
 			include( $PATHS["inc"] . "/suporte.inc" );
-		} else if ( $sessao == "alterarSenha" ){
+		} else if ( $sessao == "alterarSenha" || $sessao == "Admin" ){
 			include($PATHS["inc"] . "/admin.inc");
 		} else if ($sessao == "pesquisaIPs"){
-			include($PATHS["inc"] . "pesquisaIP.inc");
+			include($PATHS["inc"] . "/pesquisaIP.inc");
+		}else if ($sessao == "POP"){
+			include($PATHS["inc"] . "/POPs.inc");
 		} else {
 			// include( $PATHS["inc"] . "/menu.inc" );
 			include( $PATHS["inc"] . "/home.inc" );
@@ -197,9 +216,9 @@
 		   echo "<head><title>MBM - Estatísticas</title><meta http-equiv='refresh' content='0;$PHP_SELF?sessao=home'></head></script>";
 		} else {
 		   // Exibe a página home
-		   $sArqTemplate = $PATHS["tpl"] . "/cliHome.tpl";
+		   $sArqTemplate = "cliHome.tpl";
 		}
-		$tplVars .= "SELF,versao_mbm,ipaddr";
+		$tplVars .= "SELF,versao_mbm,ipaddr,sessLogin";
 	}
 
 	if( $usarTemplates ) {
@@ -212,22 +231,27 @@
 
 		/***************************************************/
 
-		$pgTPL->load_file("header", ($headerAlternativo ? $sDirTemplate . "/" .$headerAlternativo : $sDirTemplate."/header.tpl") );
-		$pgTPL->load_file("footer", ($footerAlternativo ? $sDirTemplate . "/" .$footerAlternativo : $sDirTemplate."/footer.tpl") );
+		//$pgTPL->load_file("header", ($headerAlternativo ? $sDirTemplate . "/" .$headerAlternativo : $sDirTemplate."/header.tpl") );
+		//$pgTPL->load_file("footer", ($footerAlternativo ? $sDirTemplate . "/" .$footerAlternativo : $sDirTemplate."/footer.tpl") );
 
-		$pgTPL->register("header", $tplVars);
-		$pgTPL->parse("header");
-		$pgTPL->register("footer", $tplVars);
-		$pgTPL->parse("footer");
+		//$pgTPL->register("header", $tplVars);
+		//$pgTPL->parse("header");
+		//$pgTPL->register("footer", $tplVars);
+		//$pgTPL->parse("footer");
 
-		$pgTPL->print_file("header",$tplVars);
+		//$pgTPL->print_file("header",$tplVars);
+		
+		$pgTPL->exibe( ($headerAlternativo ? $headerAlternativo : "header.tpl") );
+		
 
 		/**
 		 * Conteúdo (Gerado pelos includes)
 		 */
-		if( $sArqTemplate ) $pgTPL->print_file("base");
+		//if( $sArqTemplate ) $pgTPL->print_file("base");
+		if( $sArqTemplate ) $pgTPL->exibe($sArqTemplate);
 
-		$pgTPL->print_file("footer",$tplVars);
+		//$pgTPL->print_file("footer",$tplVars);
+		//$pgTPL->exibe();
 	}
 
 	/* Procedimento finais utilizados */

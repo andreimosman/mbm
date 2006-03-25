@@ -6,7 +6,7 @@
           <tr height=100%> 
             <td width=100% height=100% valign="top"><font face=arial size=+1 color=green><b>USUÁRIOS 
               ONLINE<b></font>
-              <hr size=1> <iframe width=100% height=180 name="online" src="{SELF}?sessao=suporte&subsessao=online"></iframe> 
+              <hr size=1> <iframe width=100% height=180 name="online" src="{$smarty.server.PHP_SELF}?sessao=suporte&subsessao=online"></iframe> 
             </td>
           </tr>
         </table></td>
@@ -17,7 +17,7 @@
         <tr height=100%> 
           <td width=100% height=100% valign="top"><font face=arial size=+1 color=red><b>USUÁRIOS 
             SEM CONEXÃO<b></font>
-            <hr size=1> <iframe width=100% height=180 name="online" src="{SELF}?sessao=suporte&subsessao=semcon"></iframe> 
+            <hr size=1> <iframe width=100% height=180 name="online" src="{$smarty.server.PHP_SELF}?sessao=suporte&subsessao=semcon"></iframe> 
           </td>
         </tr>
       </table></td>

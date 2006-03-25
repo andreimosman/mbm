@@ -1,6 +1,6 @@
 ######################################################################################
 # /etc/pf.conf                                                                       #
-# Arquivo gerado pelo MBM - Mosman Bandwidth Manager V {versao_mbm}                  #
+# Arquivo gerado pelo MBM - Mosman Bandwidth Manager V {$versao_mbm}                  #
 # Autor: Andrei de Oliveira Mosman - Todos os direitos reservados                    #
 # mosman@mosman.com.br / andreimosman@hotmail.com                                    #
 # Todos os direitos reservados                                                       #
@@ -93,7 +93,7 @@ scrub in all
 # Redes bloqueadas
 ###################
 <loop name="redes_bloqueadas">
-# {username} ({str_status})
+# {$username} ({$str_status})
 block out from any to {alvo}
 block in from {alvo} to any
 </loop name="redes_bloqueadas">
@@ -101,7 +101,7 @@ block in from {alvo} to any
 # IPs bloqueados
 ###################
 <loop name="ips_bloqueados">
-# {username} ({str_status})
+# {$username} ({$str_status})
 block out quick from any to {alvo}
 block in quick from {alvo} to any
 </loop name="ips_bloqueados">
@@ -109,7 +109,7 @@ block in quick from {alvo} to any
 # Serviços bloqueados
 ###################
 <loop name="servicos_bloqueados">
-# {username} ({servico})
+# {$username} ({$servico})
 block {tipo_bloqueio} quick proto tcp from {origem} to {destino}
 #block {tipo_bloqueio} quick proto udp from {origem} to {destino}
 </loop name="servicos_bloqueados">
@@ -124,11 +124,11 @@ block {tipo_bloqueio} quick proto tcp from {origem} to {destino}
 ##################
 
 <loop name="ips_disponiveis">
-# {username} ({str_status})
-pass in quick on {interface_externa} from any to {ipaddr}
-pass in  quick on {interface_interna} from {ipaddr} to any
-pass out quick on {interface_externa} from {ipaddr} to any  queue {queueout} label out_{rotulo}
-pass out quick on {interface_interna} from any to {ipaddr} queue {queuein} label in_{rotulo}
+# {$username} ({$str_status})
+pass in quick on {interface_externa} from any to {$ipaddr}
+pass in  quick on {interface_interna} from {$ipaddr} to any
+pass out quick on {interface_externa} from {$ipaddr} to any  queue {queueout} label out_{rotulo}
+pass out quick on {interface_interna} from any to {$ipaddr} queue {queuein} label in_{rotulo}
 </loop name="ips_disponiveis">
 
 ###########################################################################

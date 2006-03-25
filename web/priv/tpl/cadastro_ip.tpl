@@ -1,4 +1,5 @@
 <script language="JavaScript1.2">
+{literal}
 function checarString(str) {
    var expressaoRegular=/(^[a-zA-Z]+$)|((^[a-zA-Z]+)([\d|\-|\_]*$))|((^[a-zA-Z]+)([\d|\-|\_]*)([a-zA-Z]*$))/;
    return( expressaoRegular.test(str) );
@@ -93,90 +94,91 @@ function checaFormulario() {
 
    return true;
 }
+{/literal}
 </script>
 <div align="center"><font face="arial" size="4"><b>IP</b></font> </div>
 <hr size=1 width="500" color="#000000" align="center">
-<form method="post" action="{SELF}" name="form" onSubmit="return checaFormulario();">
+<form method="post" action="{$smarty.server.PHP_SELF}" name="form" onSubmit="return checaFormulario();">
   <div align="center">
-    <input type="hidden" name="sessao" value="{sessao}">
-    <input type="hidden" name="oper" value="{oper}">
-    <input type="hidden" name="ip_orig" value="{ip_orig}">
-    <font face="arial" size="-1" color="#990000"><b>{sErro}</b></font> <font face="arial" size="-1" color="#000066"><b>{sMensagem}</b></font> 
+    <input type="hidden" name="sessao" value="{$sessao}">
+    <input type="hidden" name="oper" value="{$oper}">
+    <input type="hidden" name="ip_orig" value="{$ip_orig}">
+    <font face="arial" size="-1" color="#990000"><b>{$sErro}</b></font> <font face="arial" size="-1" color="#000066"><b>{$sMensagem}</b></font>
     <table border=0 width="500" cellpadding=1 bgcolor="#000000">
-      <tr bgcolor="#ffffff"> 
-        <td> <font face="arial" size="-1"><b>IP (host/net):</b></font> <input type="text" name="ipaddr" value="{ipaddr}" maxlength="18"> 
+      <tr bgcolor="#ffffff">
+        <td> <font face="arial" size="-1"><b>IP ($host/net):</b></font> <input type="text" name="ipaddr" value="{$ipaddr}" maxlength="18">
         </td>
       </tr>
-      <tr brcolor="#FFFFF"> 
+      <tr brcolor="#FFFFF">
         <td> <table border=1 cellspacing=0 width="100%" bgcolor="#000000">
-            <tr bgcolor="#990000" align="center"> 
-              <td colspan=2><font color="#FFFFFF" size="-1" face="arial"><b> -- 
+            <tr bgcolor="#990000" align="center">
+              <td colspan=2><font color="#FFFFFF" size="-1" face="arial"><b> --
                 BANDA EM HORÁRIO COMERCIAL -- </b></font></td>
             </tr>
-            <tr bgcolor="#A0A0A0" align="center"> 
+            <tr bgcolor="#A0A0A0" align="center">
               <td width="50%"><font face="arial" size="-1"><b>UPLOAD</b></td>
               <td width="50%"><font face="arial" size="-1"><b>DOWNLOAD</b></td>
             </tr>
-            <tr> 
+            <tr>
               <td> <table border=0 bgcolor="#ffffff" width="100%">
-                  <tr> 
+                  <tr>
                     <td><font face="arial" size="-1"><b>Int:</b></font></td>
-                    <td align="left">{ife_select}</td>
+                    <td align="left">{$ife_select}</td>
                   </tr>
-                  <tr> 
+                  <tr>
                     <td><font face="arial" size="-1"><b>Banda:</b></font></td>
-                    <td align="left"><input type="text" size=4 name="banda_up" value="{banda_up}">
-                      {tp_bu_select}</td>
+                    <td align="left"><input type="text" size=4 name="banda_up" value="{$banda_up}">
+                      {$tp_bu_select}</td>
                   </tr>
                 </table></td>
               <td> <table border=0 bgcolor="#ffffff" width="100%">
-                  <tr> 
+                  <tr>
                     <td><font face="arial" size="-1"><b>Int:</b></font></td>
-                    <td align="left">{ifi_select}</td>
+                    <td align="left">{$ifi_select}</td>
                   </tr>
-                  <tr> 
+                  <tr>
                     <td><font face="arial" size="-1"><b>Banda:</b></font></td>
-                    <td align="left"><input type="text" size=4 name="banda_down" value="{banda_down}">
-                      {tp_bd_select}</td>
+                    <td align="left"><input type="text" size=4 name="banda_down" value="{$banda_down}">
+                      {$tp_bd_select}</td>
                   </tr>
                 </table></td>
             </tr>
           </table></td>
       </tr>
-      <tr brcolor="#FFFFF"> 
+      <tr brcolor="#FFFFF">
         <td> <table border=1 cellspacing=0 width="100%" bgcolor="#000000">
-            <tr bgcolor="#009900" align="center"> 
-              <td colspan=2><font color="#FFFFFF" size="-1" face="arial"><b> -- 
+            <tr bgcolor="#009900" align="center">
+              <td colspan=2><font color="#FFFFFF" size="-1" face="arial"><b> --
                 BANDA FORA DO HORÁRIO COMERCIAL (OPCIONAL) -- </b></font></td>
             </tr>
-            <tr bgcolor="#A0A0A0" align="center"> 
+            <tr bgcolor="#A0A0A0" align="center">
               <td width="50%"><font face="arial" size="-1"><b>UPLOAD</b></td>
               <td width="50%"><font face="arial" size="-1"><b>DOWNLOAD</b></td>
             </tr>
-            <tr> 
+            <tr>
               <td> <table border=0 bgcolor="#ffffff" width="100%">
-                  <tr> 
+                  <tr>
                     <td><font face="arial" size="-1"><b>Banda:</b></font></td>
-                    <td align="left"><input type="text" size=4 name="banda_up_alt" value="{banda_up_alt}">
-                      {tp_bua_select}</td>
+                    <td align="left"><input type="text" size=4 name="banda_up_alt" value="{$banda_up_alt}">
+                      {$tp_bua_select}</td>
                   </tr>
                 </table></td>
               <td> <table border=0 bgcolor="#ffffff" width="100%">
-                  <tr> 
+                  <tr>
                     <td><font face="arial" size="-1"><b>Banda:</b></font></td>
-                    <td align="left"><input type="text" size=4 name="banda_down_alt" value="{banda_down_alt}">
-                      {tp_bda_select}</td>
+                    <td align="left"><input type="text" size=4 name="banda_down_alt" value="{$banda_down_alt}">
+                      {$tp_bda_select}</td>
                   </tr>
                 </table></td>
             </tr>
           </table></td>
       </tr>
-      <tr align="center" bgcolor="#FFFFFF"> 
-        <td> <input type="submit" name="submit" value="{submit}"> </td>
+      <tr align="center" bgcolor="#FFFFFF">
+        <td> <input type="submit" name="submit" value="{$submit}"> </td>
       </tr>
     </table>
   </div>
 </form>
 <div align="center"><br>
   <br><font face="arial" size="2">
-  <a href="{SELF}?sessao=listaIPs">voltar</a> </div>
+  <a href="{$smarty.server.PHP_SELF}?sessao=listaIPs">voltar</a> </div>
