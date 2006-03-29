@@ -33,13 +33,15 @@ body {
                       <td bgcolor="#95AFBD"><font face="arial"><b>E/S</b></font></td>
                       <td bgcolor="#95AFBD"><font face="arial"><b>banda</b></font></td>
                       <td bgcolor="#95AFBD">&nbsp;</td>
+                      <td bgcolor="#95AFBD">&nbsp;</td>
                     </tr>
                     {foreach item=a from=$lista_interfaces}
                     <tr bgcolor="{$bgcolor}">
                       <td><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoInterface&interface={$a.interface}"><font face="arial" size="-1">{$a.interface}</font></td>
                       <td><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoInterface&interface={$a.interface}"><font face="arial" size="-1">{$a.tp_interface}</font></td>
                       <td><a href="{$smarty.server.PHP_SELF}?sessao=alteracaoInterface&interface={$a.interface}"><font face="arial" size="-1">{$a.banda}{$a.tp_banda}</font></td>
-                      <td><a href="{$smarty.server.PHP_SELF}?sessao=excluirInterface&amp;interface={$a.interface}"><img border="0" src="imagens/lixo.gif" width="15" height="16" alt="Excluir!!!" /></a></td>
+                      <td align="center" valign="middle"><a href="{$smarty.server.PHP_SELF}?sessao=excluirInterface&amp;interface={$a.interface}"><img border="0" src="imagens/lixo.gif" width="15" height="16" alt="Excluir!!!" /></a></td>
+                      <td align="center" valign="middle"><a href="{$smarty.server.PHP_SELF}?sessao=configurarIPinterface&interface={$a.interface}"><img src="imagens/ip.gif" alt="Configurar IPs na Interface {$a.interface} !!!" width="16" height="16" border="0" /></a></td>
                     </tr>
                     {/foreach}
                   </table>

@@ -192,6 +192,8 @@ if (!$oper){
 	
 
 
+}else if ($oper == "backup"){
+$sArqTemplate = "backup_restore.tpl";
 }
 
 	

@@ -34,7 +34,7 @@ body {
           <p align="center"><font face="arial" size="-1" color="#FF0000">{$sErro}</font> </p>
           <table width="200" border="0" align="center">
             <tr>
-              <td colspan="2" bgcolor="#003366"><img src="imagens/login.gif" width="250" height="30" /></td>
+              <td colspan="2" bgcolor="#FFFFFF"><img src="imagens/login.gif" width="250" height="30" /></td>
             </tr>
             <tr>
               <td align="right"><font face="arial" size="-1">username:</font></td>

@@ -203,6 +203,11 @@
 			include($PATHS["inc"] . "/POPs.inc");
 		} else if ($sessao == "relatorio"){
 			include($PATHS["inc"] . "/relatorios.inc");
+		} else if ($sessao == "configurarIPinterface"){
+			include($PATHS["inc"] . "/interfaceIP.inc");
+		} else if ($sessao == "prefs"){
+			include($PATHS["inc"] . "/preferencias.inc");
+		
 		} else {
 			// include( $PATHS["inc"] . "/menu.inc" );
 			include( $PATHS["inc"] . "/home.inc" );
