@@ -5,7 +5,7 @@
     */    
    
    // MBM
-   $MBM["versao"] = "1.9";
+   $MBM["versao"] = "2.0";
    
    // PostgreSQL
    $sSQLUser = "mbm";

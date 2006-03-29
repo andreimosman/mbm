@@ -384,7 +384,7 @@
                     ($mac ? "'".AddSlashes(trim($mac))."', ": "NULL, ").
                     "'".AddSlashes(trim($status))."', " .
                     "'".AddSlashes(trim($pppoe))."', " .
-                    "'".AddSlashes(trim($pop))."', " .
+                    "'".AddSlashes(trim($pop))."' " .
                  ")";
          $bd->consulta($sSQL,false);
          
@@ -396,7 +396,7 @@
 	
          // Dados Cadastrais do Cliente
          $sSQL = "INSERT INTO ".
-                 "   bmtb_cliente_info (username,nome_razao,tp_pessoa,cpf_cnpj,rg_ie,logradouro,numero,complemento,bairro,cidade,uf,cep,fone,dt_ativacao,resp_tecnico,email,flg_comodato,flg_gw_isp,tipo_conexao,observacoes,pop) ".
+                 "   bmtb_cliente_info (username,nome_razao,tp_pessoa,cpf_cnpj,rg_ie,logradouro,numero,complemento,bairro,cidade,uf,cep,fone,dt_ativacao,resp_tecnico,email,flg_comodato,flg_gw_isp,tipo_conexao,observacoes) ".
                  "VALUES (".
                     "'".AddSlashes(trim($username))."', " .
                     "'".AddSlashes(trim($nome_razao))."', " .

@@ -8,10 +8,10 @@
 <div align="center">
   <table border="0" cellspacing="0" width="100%">
     <tr bgcolor="#AAAAAA"> 
-      <td><font face="arial"><b>nas</b></font></td>
-      <td><font face="arial"><b>ip</b></font></td>
-      <td><font face="arial"><b>usr</b></font></td>
-      <td><font face="arial"><b>login</b></font></td>
+      <td bgcolor="#95AFBD"><font face="arial"><b>nas</b></font></td>
+      <td bgcolor="#95AFBD"><font face="arial"><b>ip</b></font></td>
+      <td bgcolor="#95AFBD"><font face="arial"><b>usr</b></font></td>
+      <td bgcolor="#95AFBD"><font face="arial"><b>login</b></font></td>
     </tr>
     <loop name="lista_online"> 
     <tr bgcolor="{$bgcolor}"> 

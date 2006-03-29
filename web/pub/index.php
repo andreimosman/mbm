@@ -77,7 +77,8 @@
 	session_register("sessIPCli");
 
 	//$arqCerto = ($arquivoPHP == "index.php" || $arquivoPHP = "") ? "C" : "A" ;
-       $arqCerto = "A";
+
+       $arqCerto = "A";
 	 //echo "arqCerto: $arqCerto / sessTipoLogin: $sessTipoLogin <br>\n";
 	 //echo "sessLogin: $sessLogin <br>\n";
 	 //echo "arquivoPHP: $arquivoPHP<br>\n";
@@ -198,8 +199,10 @@
 			include($PATHS["inc"] . "/admin.inc");
 		} else if ($sessao == "pesquisaIPs"){
 			include($PATHS["inc"] . "/pesquisaIP.inc");
-		}else if ($sessao == "POP"){
+		} else if ($sessao == "POP"){
 			include($PATHS["inc"] . "/POPs.inc");
+		} else if ($sessao == "relatorio"){
+			include($PATHS["inc"] . "/relatorios.inc");
 		} else {
 			// include( $PATHS["inc"] . "/menu.inc" );
 			include( $PATHS["inc"] . "/home.inc" );
@@ -241,7 +244,7 @@
 
 		//$pgTPL->print_file("header",$tplVars);
 		
-		$pgTPL->exibe( ($headerAlternativo ? $headerAlternativo : "header.tpl") );
+		$pgTPL->exibe( ($headerAlternativo ? $headerAlternativo : "header2.tpl") );
 		
 
 		/**

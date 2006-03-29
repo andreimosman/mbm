@@ -8,10 +8,10 @@
 <div align="center">
   <table border="0" cellspacing="0" width="100%">
     <tr bgcolor="#AAAAAA"> 
-      <td><font face="arial"><b>ip</b></font></td>
-      <td><font face="arial"><b>usr</b></font></td>
-      <td><font face="arial"><b>resp</b></font></td>
-      <td><font face="arial"><b>fone</b></font></td>
+      <td bgcolor="#95AFBD"><font face="arial"><b>ip</b></font></td>
+      <td bgcolor="#95AFBD"><font face="arial"><b>usr</b></font></td>
+      <td bgcolor="#95AFBD"><font face="arial"><b>resp</b></font></td>
+      <td bgcolor="#95AFBD"><font face="arial"><b>fone</b></font></td>
     </tr>
     <loop name="lista_semcon"> 
     <tr bgcolor="{$bgcolor}"> 

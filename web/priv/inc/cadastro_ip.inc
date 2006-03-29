@@ -132,7 +132,7 @@
       $sSQL .= "WHERE ";
       $sSQL .= "   c.ipaddr = ip.ipaddr ";
       $sSQL .= "   AND cs.username = c.username ";
-      $sSQL .= "   AND ip.ipaddr='".$ip."'";
+      $sSQL .= "   AND ip.ipaddr='".$ip."' ";
 
       $lsSvc = $bd->obtemRegistros($sSQL);
       
@@ -225,23 +225,7 @@
                  ")";
          $bd->consulta($sSQL,false);
          
-         // --> CODIGO HUGO - INICIO
-		 
-		// $banda_up_alt = @$_REQUEST["banda_up_alt"];
-		// $banda_down_alt = @$_REQUEST["banda_down_alt"];
-		 
-		 
-		// if ($banda_up_alt == "" || $banda_up_alt == "0"){
-		// 	$banda_up_alt = null;
-		// }
-		// if ($banda_down_alt == "" || $banda_down_alt == "0"){
-		// 	$banda_down_alt = null;
-		// }
-		 // -> CODIGO HUGO - FINAL
-		 
-		 
-		 
-
+         
          if( !$banda_up || !$banda_down ) {
             $sSQL = "DELETE FROM bmtb_ip_alternativo WHERE ipaddr = " . "'".AddSlashes(trim($ipaddr))."'";
             //echo "SQL IP ALTERN.: $sSQL <br>";
@@ -428,14 +412,14 @@
 				$lynx_hr = strstr($HTTP_USER_AGENT,"Lynx") ? '<tr height="1"><td colspan="8" height="1"><hr size=1></td></tr>': '';
 
 				// Improvements: OUTERJOIN :)) Agora usando postgres é possível
-				$sSQL = "SELECT ".
-						"   i.ipaddr,i.interface_externa,i.interface_interna, i.banda_up,i.tipo_banda_up,i.banda_down,i.tipo_banda_down, ".
-						"   c.username as cliente, c.mac, c.status, ia.banda_up as banda_up_alt, ia.tipo_banda_up as tipo_banda_up_alt,  ".
-						"   ia.banda_down as banda_down_alt, ia.tipo_banda_down as tipo_banda_down_alt ".
-						"FROM ".
-						"   ( bmtb_ip as i LEFT OUTER JOIN bmtb_cliente as c USING( ipaddr ) ) LEFT OUTER JOIN bmtb_ip_alternativo ia ON( i.ipaddr = ia.ipaddr) ";
-						" ORDER BY ".
-						"   i.ipaddr ";
+				$sSQL  = "SELECT ";
+				$sSQL .= "   i.ipaddr,i.interface_externa,i.interface_interna, i.banda_up,i.tipo_banda_up,i.banda_down,i.tipo_banda_down, ";
+				$sSQL .= "   c.username as cliente, c.mac, c.status, ia.banda_up as banda_up_alt, ia.tipo_banda_up as tipo_banda_up_alt,  ";
+				$sSQL .= "   ia.banda_down as banda_down_alt, ia.tipo_banda_down as tipo_banda_down_alt ";
+				$sSQL .= "FROM ";
+				$sSQL .= "   ( bmtb_ip as i LEFT OUTER JOIN bmtb_cliente as c USING( ipaddr ) ) LEFT OUTER JOIN bmtb_ip_alternativo ia ON( i.ipaddr = ia.ipaddr) ";
+				$sSQL .= " ORDER BY ";
+				$sSQL .= "   i.ipaddr ASC";
 
 				$lista_ips = $bd->obtemRegistros( $sSQL );
 
@@ -553,7 +537,7 @@
 				switch ($cond){
 					
 					case 'username':
-						$sSQL .=" c.username = '".$chave."' ";
+						$sSQL .=" c.username ilike '%".$chave."%' ";
 					break;
 					
 					case 'ip':
@@ -561,8 +545,8 @@
 					break;
 				}
 
-				//$sSQL .=" ORDER BY ".
-				//$sSQL .="   i.ipaddr ";
+				$sSQL .=" ORDER BY ";
+				$sSQL .="  ia.ipaddr ASC ";
 
 				//echo "SQL PESQUISA: $sSQL <br>\n";
 

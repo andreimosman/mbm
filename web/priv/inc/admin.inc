@@ -53,7 +53,8 @@ if (!$oper){
 	
 	if ($sessTipoConta != "/"){
 		$mensagem = "Você não tem Privilégio para<br>acessar esta Sessão";
-		$tplVars .= ",mensagem";
+		$priv = "nao";
+		$tplVars .= ",mensagem,priv";
 		$sArqTemplate = "cadastra_usuarios_ok.tpl";
 		return;
 		
