@@ -33,7 +33,8 @@ body {
       </tr>
       <tr>
         <td align="center"><center>
-          <p><br />
+          <p><img src="imagens/relatorios.gif" alt=" " width="400" height="50" /><br />
+            <br />
             <font face="arial" size="4">Gr&aacute;ficos de Consumo </font><br />
           </p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">

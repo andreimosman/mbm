@@ -21,7 +21,8 @@ body {
       </tr>
       <tr>
         <td align="center"><center>
-          <p><br />
+          <p><img src="imagens/relatorios.gif" width="400" height="50" /><br />
+            <br />
             <font face="arial" size="4">Clientes Bloqueados </font><br /> 
             {if !$bloqueados || $bloqueados == ""}<font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#003399">N&atilde;o
             existe nenhum cliente bloqueado no sistema</font>{/if}

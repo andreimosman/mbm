@@ -43,6 +43,7 @@ function checa(){
       <tr>
         <td align="center">&nbsp;</td>
       </tr>
+	  <tr><td><img src="images/admin.gif" /></td></tr>
       <tr>
         <td align="center"><table width="500" border="0" align="center" cellpadding="0" cellspacing="2">
           <tr>

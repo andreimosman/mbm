@@ -1,5 +1,5 @@
   <br><br>
-  <font face="arial" size="4" color="black"><b><p align=center>IPs</p></b></font><br>
+  <font face="arial" size="4" color="black"><b><p align=center><img src="imagens/ip2.gif" alt=" " width="400" height="50" /></p></b></font><br>
   <p align=center>{$mensagem}</p><br>
 
   <table border="0" cellspacing="0" width="600" align="center">

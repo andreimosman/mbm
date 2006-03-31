@@ -1,7 +1,7 @@
 {literal}
 <style type="text/css">
 <!--
-.style1 {font-size: 12px}
+.style1 {font-size: 12px; color: #FFFFFF}
 .style4 {
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
@@ -30,7 +30,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-            <font face="arial" size="4">POPs<br />
+            <font face="arial" size="4"><img src="imagens/pop.gif" width="400" height="50" /><br />
             </font><a href="{$smarty.server.PHP_SELF}?sessao=POP&amp;subsessao=cadastro">Cadastrar Novo</a> <br />
 </p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">
@@ -39,8 +39,8 @@ body {
                 <tr>
                   <td align="center"><table border="0" cellspacing="0" width="600" align="center">
                       <tr bgcolor="#AAAAAA">
-                        <td width="490" bgcolor="#D6E2EB">&nbsp;</td>
-                        <td width="106" bgcolor="#ACC5D7"><div align="center" class="style4">A&ccedil;&otilde;es</div></td>
+                        <td width="490" bgcolor="#003366">&nbsp;</td>
+                        <td width="106" bgcolor="#003366"><div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FFFFFF"><b>A&ccedil;&otilde;es</b></font></div></td>
                       </tr>
                       <tr>
                         <td colspan="2" bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="0">

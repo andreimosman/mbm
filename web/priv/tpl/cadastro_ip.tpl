@@ -20,7 +20,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-          <font size="4" face="arial">IP</font>
+          <font size="4" face="arial"><img src="imagens/ip2.gif" width="400" height="50" /></font>
           <br />
 </p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">

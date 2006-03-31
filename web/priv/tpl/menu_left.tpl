@@ -39,99 +39,145 @@ body {
       </tr>
       <tr>
         <td width="5">&nbsp;</td>
-        <td><span class="style1">Configura&ccedil;&otilde;es</span></td>
+        <td><span class="style1">Usu&aacute;rios &amp; IPs</span></td>
       </tr>
-      <tr>
-        <td width="5">&nbsp;</td>
-        <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
-          <tr>
-            <td colspan="2"><img src="imagens/pixel.gif" width="1" height="5" /></td>
-            </tr>
-          <tr>
-            <td width="6"><img src="imagens/gif_left.gif" width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=POP">POPs</a></td>
-          </tr>
-          <tr>
-            <td width="6"><img src="imagens/gif_left.gif" alt=" " width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=listaInterfaces">Interfaces</a></td>
-          </tr>
-          <tr>
-            <td width="6"><img src="imagens/gif_left.gif" alt=" " width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=prefs">Prefer&ecirc;ncias</a></td>
-          </tr>
-          <tr>
-            <td width="6"><img src="imagens/gif_left.gif" alt=" " width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=alterarSenha">Alterar Senha </a></td>
-          </tr>
-          <tr>
-            <td width="6"><img src="imagens/gif_left.gif" alt=" " width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=Admin&amp;oper=admin">Administradores</a></td>
-          </tr>
-          <tr>
-            <td width="6"><img src="imagens/gif_left.gif" alt=" " width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=Admin&amp;oper=backup">Backup/Restore</a></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
+	        <tr>
         <td width="5"><img src="imagens/pixel.gif" alt=" " width="1" height="1" /></td>
         <td bgcolor="#006699"><img src="imagens/pixel.gif" width="1" height="1" /></td>
       </tr>
+
       <tr>
         <td width="5">&nbsp;</td>
-        <td class="style1">IPs</td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
         <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
+		
           <tr>
             <td colspan="2"><img src="imagens/pixel.gif" alt=" " width="1" height="5" /></td>
-            </tr>
-          <tr>
-            <td width="6"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=cadastroIP">Novo IP/Rede </a></td>
           </tr>
           <tr>
-            <td><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td width="117" height="6"><a href="{$smarty.server.PHP_SELF}?sessao=cadastroCliente">Habilitar
+                Cliente </a></td>
+          </tr>
+          <tr>
+            <td align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
             <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=listaIPs">Pesquisa</a></td>
           </tr>
           <tr>
-            <td width="6"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=listaIPs&amp;oper=tudo">Lista</a></td>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=listaIPs&amp;oper=tudo">Lista
+                Geral </a></td>
           </tr>
           <tr>
-            <td width="6"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=cadastroCliente">Habilitar Cliente </a></td>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=cadastroIP">Novo
+                IP/Rede </a><a href="{$smarty.server.PHP_SELF}?sessao=cadastroCliente"></a></td>
           </tr>
-
         </table></td>
       </tr>
+	            <tr align="right">
+            <td colspan="2"><img src="imagens/pixel.gif" alt="." width="1" height="5" /></td>
+          </tr>
+
       <tr>
-        <td><img src="imagens/pixel.gif" alt=" " width="1" height="1" /></td>
-        <td bgcolor="#006699"><img src="imagens/pixel.gif" alt=" " width="1" height="1" /></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
+        <td width="5">&nbsp;</td>
         <td class="style1">Relat&oacute;rios</td>
       </tr>
+	        <tr>
+        <td width="5"><img src="imagens/pixel.gif" alt=" " width="1" height="1" /></td>
+        <td bgcolor="#006699"><img src="imagens/pixel.gif" width="1" height="1" /></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+        <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
+          <tr align="right">
+            <td colspan="2"><img src="imagens/pixel.gif" alt=" " width="1" height="5" /></td>
+          </tr>
+          <tr>
+            <td width="15" height="6" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td width="119" height="6"><a href="{$smarty.server.PHP_SELF}?sessao=relatorio&amp;tipo=usuario_bloq">Clientes
+                Bloqueados </a></td>
+          </tr>
+          <tr>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=relatorio&amp;tipo=grafico">Gr&aacute;ficos</a></td>
+          </tr>
+        </table></td>
+      </tr>
+	            <tr align="right">
+            <td colspan="2"><img src="imagens/pixel.gif" alt="." width="1" height="5" /></td>
+          </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+        <td class="style1">Ferramentas</td>
+      </tr>
+	        <tr>
+        <td></td>
+        <td bgcolor="#006699"><img src="imagens/pixel.gif" alt=" " width="1" height="1" /></td>
+      </tr>
+
       <tr>
         <td>&nbsp;</td>
         <td align="center" valign="top"><table width="100%" border="0" cellspacing="1" cellpadding="1">
-          <tr>
+          <tr align="right">
             <td colspan="2"><img src="imagens/pixel.gif" alt=" " width="1" height="5" /></td>
-            </tr>
-          <tr>
-            <td width="6" height="6"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=relatorio&amp;tipo=usuario_bloq">Clientes Bloqueados </a></td>
           </tr>
           <tr>
-            <td><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=relatorio&amp;tipo=grafico">Gr&aacute;ficos de Consumo </a></td>
+            <td width="15" height="6" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=Admin&amp;oper=backup">Backup/Restore</a><a href="{$smarty.server.PHP_SELF}?sessao=relatorio&amp;tipo=usuario_bloq"></a></td>
           </tr>
           <tr>
-            <td><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
-            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=relatorio&amp;tipo=arp">Tabela ARP </a></td>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=relatorio&amp;tipo=arp">Tabela
+                ARP </a></td>
           </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td></td>
+        </tr>
+		          <tr align="right">
+            <td colspan="2"><img src="imagens/pixel.gif" alt="." width="1" height="5" /></td>
+          </tr>
+
+      <tr>
+        <td></td>
+        <td class="style1">Configura&ccedil;&otilde;es</td>
+      </tr>
+	        <tr>
+        <td><img src="imagens/pixel.gif" alt=" " width="1" height="1" /></td>
+        <td bgcolor="#006699"><img src="imagens/pixel.gif" alt=" " width="1" height="1" /></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+        <td align="center" valign="top"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+          <tr align="right">
+            <td colspan="2"><img src="imagens/pixel.gif" alt="." width="1" height="5" /></td>
+          </tr>
+          <tr>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=POP">POPs</a></td>
+          </tr>
+          <tr>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=listaInterfaces">Interfaces</a></td>
+          </tr>
+          <tr>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=prefs">Prefer&ecirc;ncias</a></td>
+          </tr>
+          <tr>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=alterarSenha">Alterar
+                Senha </a></td>
+          </tr>
+          <tr>
+            <td width="15" align="right"><img src="imagens/gif_left.gif" alt="." width="6" height="6" /></td>
+            <td height="6"><a href="{$smarty.server.PHP_SELF}?sessao=Admin&amp;oper=admin">Administradores</a></td>
+          </tr>
+
         </table></td>
       </tr>
     </table></td>

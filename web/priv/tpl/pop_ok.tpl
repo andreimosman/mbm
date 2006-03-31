@@ -34,7 +34,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-            <font face="arial" size="4">POPs<br />
+            <font face="arial" size="4"><img src="imagens/pop.gif" width="400" height="50" /><br />
             </font><a href="{$smarty.server.PHP_SELF}?sessao=POP">voltar para lista</a><br />
 </p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">

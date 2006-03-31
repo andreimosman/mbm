@@ -19,8 +19,9 @@ body {
       </tr>
       <tr>
         <td align="center"><center>
-          <p><br />
-          <font size="4" face="arial">Exclus&atilde;o de Interface </font>
+          <p><img src="imagens/interfaces2.gif" alt=" " width="400" height="50" /><br />
+            <br />
+          <font size="4" face="arial">Exclus&atilde;o</font>
           <br />
 </p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">

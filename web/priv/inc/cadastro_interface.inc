@@ -14,6 +14,8 @@
     $tipo_banda = @$_REQUEST["tipo_banda"];
     $oper = @$_REQUEST["oper"];
     $userAdmin = $_SESSION["sessLogin"];
+    $nat = @$_REQUEST["nat"];
+    $observacao = @$_REQUEST["observacao"];
     
     $sErro = "";
     
@@ -141,12 +143,14 @@
       if(!$sErro) {
          // Tenta inserir no banco de dados.
          $sSQL = "INSERT INTO ".
-                 "   bmtb_interface (interface,tipo_interface,banda,tipo_banda) ".
+                 "   bmtb_interface (interface,tipo_interface,banda,tipo_banda,observacao,nat) ".
                  "VALUES (".
                     "'".AddSlashes(trim($interface))."', " .
                     "'".AddSlashes(trim($tipo_interface))."', " .
                     "'".AddSlashes(trim($banda))."', " .
-                    "'".AddSlashes(trim($tipo_banda))."' " .
+                    "'".AddSlashes(trim($tipo_banda))."', " .
+                    "'".AddSlashes(trim($observacao))."', " .
+                    "'".AddSlashes(trim($nat))."' " .
                  ")";
          $bd->consulta($sSQL,false);
          
@@ -196,7 +200,9 @@
             $sSQL = "UPDATE bmtb_interface SET " .
                     "   tipo_interface = '".AddSlashes(trim($tipo_interface))."', ".
                     "   banda = '".AddSlashes(trim($banda))."', ".
-                    "   tipo_banda = '".AddSlashes(trim($tipo_banda))."' ".
+                    "   tipo_banda = '".AddSlashes(trim($tipo_banda))."', ".
+                    "   observacao = '".AddSlashes(trim($observacao))."', ".
+                    "   nat = '".AddSlashes(trim($nat))."' ".
                     "WHERE interface = '".$if_orig."'";
          
             $bd->consulta($sSQL,false);
@@ -206,12 +212,14 @@
 
             // Insere um novo registro
             $sSQL = "INSERT INTO ".
-                    "   bmtb_interface (interface,tipo_interface,banda,tipo_banda) ".
+                    "   bmtb_interface (interface,tipo_interface,banda,tipo_banda,observacao,nat) ".
                     "VALUES (".
                        "'".AddSlashes(trim($interface))."', " .
                        "'".AddSlashes(trim($tipo_interface))."', " .
                        "'".AddSlashes(trim($banda))."', " .
                        "'".AddSlashes(trim($tipo_banda))."' " .
+                       "'".AddSlashes(trim($observacao))."', " .
+                       "'".AddSlashes(trim($nat))."' " .
                     ")";
             $bd->consulta($sSQL,false);       
          

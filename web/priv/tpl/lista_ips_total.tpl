@@ -7,7 +7,8 @@
 
 <body>
 <p>&nbsp;</p>
-<p align="center"><font size="3"><strong><font size="4" face="Arial, Helvetica, sans-serif">IPs</font></strong></font><br />
+<p align="center"><img src="imagens/ip2.gif" alt=" " width="400" height="50" /><strong><font size="4" face="Arial, Helvetica, sans-serif"><br />
+</font></strong><br />
     <font size="3" face="Verdana, Arial, Helvetica, sans-serif">Lista Completa</font></p>
 <table width="600" border="0" align="center" cellspacing="0">
     <tr> 

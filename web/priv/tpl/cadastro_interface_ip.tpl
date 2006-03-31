@@ -1,6 +1,22 @@
 {literal}
 <style type="text/css">
 <!--
+.style2 {font-size: 10px}
+-->
+</style>
+
+<style type="text/css">
+<!--
+.style3 {font-size: 10px}
+.style5 {
+	font-size: 14px;
+	font-weight: bold;
+}
+-->
+</style>
+
+<style type="text/css">
+<!--
 .style1 {
 	font-size: 10px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -27,9 +43,13 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-          <font size="4" face="arial">Cadastro de IP na Interface {$interface} </font>
+              <img src="imagens/interfaces2.gif" alt=" " width="400" height="50" /><br />
+          <font size="4" face="arial">Cadastro de IP <br />
+          </font><font face="arial"><span class="style5">Interface: 
+          {$interface} </span></font>
           <br />
-          <font face="verdana" size="2" color="black">Caso entre no campo ip os bits de rede (ex: /30)<br>deixe o campo mascara
+          <font face="verdana" color="black" size="2">Caso entre no campo ip os bits de rede (ex: /30)<br>
+          deixe o campo mascara
           em branco.</font></p>
           <form action="{$smarty.server.PHP_SELF}" method="post" name="form" id="form">
             <div align="center">
@@ -37,6 +57,7 @@ body {
               <input type="hidden" name="sessao" value="{$sessao}" />
               <input name="interface" type="hidden" id="interface" value="{$interface}" />
               <font face="arial" size="-1" color="#000099"><b>{$mensagem}</b></font>
+              <font face="arial" size="-1" color="red"><b>{$erro}</b></font>
               <table border="0" width="400">
                 <tr>
                   <td><font face="arial" size="-1"><b>IP:</b></font></td>

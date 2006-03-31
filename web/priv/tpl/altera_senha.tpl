@@ -43,6 +43,7 @@ function checa(){
       <tr>
         <td align="center">&nbsp;</td>
       </tr>
+	  <tr><td align="center"><img src="imagens/admin.gif" /></td></tr>
       <tr>
         <td align="center"><table width="500" border="0" align="center" cellpadding="0" cellspacing="2">
           <tr>
@@ -51,7 +52,7 @@ function checa(){
               Usu&aacute;rio: {$userAdmin}</font></td>
           </tr>
           <tr>
-            <td><hr size="1" width="500" color="#000000" align="center" /></td>
+            <td></td>
           </tr>
           <tr>
             <td></tr></td>

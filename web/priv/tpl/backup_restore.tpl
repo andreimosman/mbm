@@ -50,7 +50,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-            <font face="arial" size="4">Backup &amp; Restore <br />
+            <font face="arial" size="4"><img src="imagens/backup.gif" width="400" height="50" /><br />
             </font></p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">
             <tr>

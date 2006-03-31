@@ -20,8 +20,8 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-            <font face="arial" size="4">Clientes</font><br />
-</p>
+            <img src="imagens/clientes.gif" width="400" height="50" /><br />
+          </p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">
             <tr>
               <td align="center"><form action="{$smarty.server.PHP_SELF}" method="post" name="form" id="form" onsubmit="return checaFormulario();">

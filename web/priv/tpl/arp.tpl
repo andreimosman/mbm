@@ -50,8 +50,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-            <font face="arial" size="4">ARP<br />
-            </font></p>
+            <font face="arial" size="4"><img src="imagens/arp.gif" width="400" height="50" /></font></p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">
             <tr>
               <td align="center"><form action="{$smarty.server.PHP_SELF}" method="get" >

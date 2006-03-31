@@ -57,3 +57,15 @@ A:hover {
 #menuTop A:hover {
 	COLOR: #000000; TEXT-DECORATION: none;
 }
+#barra A {
+	COLOR: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; TEXT-DECORATION: none;
+	}
+#barra A:link {
+	COLOR: #FFFFFF; TEXT-DECORATION: none
+}
+#barra A:visited {
+	COLOR: #FFFFFF; TEXT-DECORATION: none
+}
+#barra A:hover {
+	COLOR: #D6E2EB; TEXT-DECORATION: none;
+}

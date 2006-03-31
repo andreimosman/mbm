@@ -30,6 +30,7 @@
 	require_once( $PATHS["lib"] . "/classe_bancodedados.inc" );
 	require_once( $PATHS["lib"] . "/class_template.inc" );
 	require_once( $PATHS["lib"] . "/classe_logger.inc" );
+	require_once( $PATHS["lib"] . "/classe_ipcalc.inc" );
 	
 	$logger = new logger;
 

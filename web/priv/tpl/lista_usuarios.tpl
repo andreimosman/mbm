@@ -32,7 +32,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-            <font face="arial" size="4">Administradores<br />
+            <font face="arial" size="4"><img src="imagens/admin.gif" width="400" height="50" /><br />
             </font><a href="{$smarty.server.PHP_SELF}?sessao=Admin&amp;oper=admin&amp;subsessao=cadastrar">Cadastrar Novo</a> <font face="arial" size="4"><br />
             </font></p>
           <table width="600" border="0" cellspacing="5" cellpadding="0">

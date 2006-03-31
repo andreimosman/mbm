@@ -28,7 +28,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-            <font face="arial" size="4">Administradores<br />
+            <font face="arial" size="4"><img src="imagens/admin.gif" alt=" " width="400" height="50" /><br />
             </font><font face="arial" class="style6">{if !$priv || $priv=="sim"}<a href="{$smarty.server.PHP_SELF}?sessao=Admin&amp;oper=admin">voltar
             para lista</a>{/if}</font><br />
 </p>

@@ -28,7 +28,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-              <font face="arial" size="4">POP<br />
+              <font face="arial" size="4"><img src="imagens/pop.gif" alt=" " width="400" height="50" /><br />
               </font><font face="arial" class="style6"><a href="{$smarty.server.PHP_SELF}?sessao=POP">voltar
               para lista de POPs </a> </font></p>
           <p class="style7">{$msg} POP <br />

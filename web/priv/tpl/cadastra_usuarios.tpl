@@ -28,7 +28,7 @@ body {
       <tr>
         <td align="center"><center>
           <p><br />
-            <font face="arial" size="4">Administradores<br />
+            <font face="arial" size="4"><img src="imagens/admin.gif" width="400" height="50" /><br />
             </font><font face="arial" class="style6"><a href="{$smarty.server.PHP_SELF}?sessao=Admin&amp;oper=admin">voltar
             para lista</a> </font></p>
           <p class="style7">{$msg} Usu&aacute;rio<br />
